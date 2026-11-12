@@ -11,7 +11,7 @@ const START = [
 ]
 
 export default function NotificationBell() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
   const [unread, setUnread] = useState(new Set([1, 2]))
   const root = useRef<HTMLDivElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)

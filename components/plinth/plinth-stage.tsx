@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { previewRegistry } from "@/previews/registry"
 import { cn } from "@/lib/utils"
+import { PreviewBoundary } from "./preview-boundary"
 import { useInView } from "./use-in-view"
 
 export type StageWidth = "mobile" | "tablet" | "full"
@@ -37,9 +38,9 @@ export function PlinthStage({ previewId, variant, mode = "detail", width = "full
     <figure className={cn("plinth", className)}>
       <div className="plinth-stage">
         {mode === "card" ? (
-          <CardStage kind={kind}>{Preview ? <Preview variant={variant} /> : <Missing id={previewId} />}</CardStage>
+          <CardStage kind={kind}><PreviewBoundary id={previewId}>{Preview ? <Preview variant={variant} /> : <Missing id={previewId} />}</PreviewBoundary></CardStage>
         ) : (
-          <DetailStage width={width}>{Preview ? <Preview variant={variant} /> : <Missing id={previewId} />}</DetailStage>
+          <DetailStage width={width}><PreviewBoundary id={previewId}>{Preview ? <Preview variant={variant} /> : <Missing id={previewId} />}</PreviewBoundary></DetailStage>
         )}
       </div>
       <div className="plinth-base" aria-hidden />
