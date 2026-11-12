@@ -1,16 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { feature } from "topojson-client"
-import type { Topology } from "topojson-specification"
-import land from "world-atlas/land-110m.json"
 import { cn } from "@/lib/utils"
 
 /**
  * Earth rendered per pixel: each pixel on the disc is mapped back to a
- * latitude and longitude, then shaded using a land mask built from public
- * domain Natural Earth data (via the world-atlas package), a procedural cloud
- * layer, a light direction and an atmosphere rim.
+ * latitude and longitude and colored from a NASA satellite map (public domain,
+ * via Wikimedia Commons), then lit with a sun direction, a procedural cloud
+ * layer, an ocean highlight and an atmosphere rim.
  */
 
 const CITIES = [
@@ -24,7 +21,7 @@ const CITIES = [
   { name: "Vancouver", lat: 49.3, lon: -123.1 },
 ]
 const rad = Math.PI / 180
-const MW = 2048, MH = 1024
+const TW = 2048, TH = 1024
 const CW = 512, CH = 256
 
 const toVec = (lat: number, lon: number) => {
@@ -46,32 +43,20 @@ function slerp(a: readonly number[], b: readonly number[], t: number, lift: numb
   return [(a[0] * k1 + b[0] * k2) * h, (a[1] * k1 + b[1] * k2) * h, (a[2] * k1 + b[2] * k2) * h] as const
 }
 
-/** Equirectangular land mask, 0 to 255, from the Natural Earth polygons. */
-function buildLandMask() {
-  const c = document.createElement("canvas")
-  c.width = MW; c.height = MH
-  const g = c.getContext("2d", { willReadFrequently: true })!
-  g.fillStyle = "#000"; g.fillRect(0, 0, MW, MH)
-  g.fillStyle = "#fff"
-  const topo = land as unknown as Topology
-  const geo = feature(topo, topo.objects.land) as unknown as { type: string; features?: { geometry: { type: string; coordinates: number[][][][] | number[][][] } }[]; geometry?: { type: string; coordinates: number[][][][] | number[][][] } }
-  const geoms = geo.features ? geo.features.map((f) => f.geometry) : [geo.geometry!]
-  g.beginPath()
-  for (const gm of geoms) {
-    const polys = (gm.type === "MultiPolygon" ? gm.coordinates : [gm.coordinates]) as number[][][][]
-    for (const poly of polys) for (const ring of poly) {
-      ring.forEach(([lon, lat], i) => {
-        const x = ((lon + 180) / 360) * MW, y = ((90 - lat) / 180) * MH
-        if (i) g.lineTo(x, y); else g.moveTo(x, y)
-      })
-      g.closePath()
+/** Loads the equirectangular Earth map into raw RGB at TW by TH. */
+function loadTexture(): Promise<Uint8ClampedArray> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      const c = document.createElement("canvas")
+      c.width = TW; c.height = TH
+      const g = c.getContext("2d", { willReadFrequently: true })!
+      g.drawImage(img, 0, 0, TW, TH)
+      resolve(g.getImageData(0, 0, TW, TH).data)
     }
-  }
-  g.fill("evenodd")
-  const px = g.getImageData(0, 0, MW, MH).data
-  const out = new Uint8Array(MW * MH)
-  for (let i = 0; i < out.length; i++) out[i] = px[i * 4]
-  return out
+    img.onerror = reject
+    img.src = "/earth/earth-texture.jpg"
+  })
 }
 
 /** Tileable value-noise clouds, 0 to 255. */
@@ -103,6 +88,17 @@ function sample(arr: Uint8Array, w: number, h: number, u: number, v: number) {
   return a + (b - a) * tx + (c - a) * ty + (a - b - c + d) * tx * ty
 }
 
+function sampleRGB(tex: Uint8ClampedArray, u: number, v: number, out: number[]) {
+  const x = ((u % 1) + 1) % 1 * TW, y = Math.min(Math.max(v, 0), 0.9999) * (TH - 1)
+  const x0 = Math.floor(x), y0 = Math.floor(y), tx = x - x0, ty = y - y0
+  const x1 = (x0 + 1) % TW, y1 = Math.min(y0 + 1, TH - 1)
+  const i00 = (y0 * TW + x0) * 4, i10 = (y0 * TW + x1) * 4, i01 = (y1 * TW + x0) * 4, i11 = (y1 * TW + x1) * 4
+  for (let k = 0; k < 3; k++) {
+    const a = tex[i00 + k], b = tex[i10 + k], c = tex[i01 + k], d = tex[i11 + k]
+    out[k] = a + (b - a) * tx + (c - a) * ty + (a - b - c + d) * tx * ty
+  }
+}
+
 export default function InteractiveGlobe() {
   const wrap = useRef<HTMLDivElement>(null)
   const canvas = useRef<HTMLCanvasElement>(null)
@@ -118,8 +114,11 @@ export default function InteractiveGlobe() {
     const ctx = el.getContext("2d")
     if (!ctx) return
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
-    const mask = buildLandMask()
     const clouds = buildClouds()
+    let tex: Uint8ClampedArray | null = null
+    let cancelled = false
+    loadTexture().then((t) => { if (!cancelled) tex = t }).catch(() => {})
+    const rgb = [0, 0, 0]
     const sphere = document.createElement("canvas")
     const sg = sphere.getContext("2d")!
     let w = 0, h = 0, R = 0, S = 0, img: ImageData | null = null
@@ -147,7 +146,7 @@ export default function InteractiveGlobe() {
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame)
       const dt = Math.min(now - last, 50); last = now
-      if (!visible || !img) return
+      if (!visible || !img || !tex) return
       const v = view.current
       if (v.targetYaw !== null && v.targetPitch !== null) {
         let dy = v.targetYaw - v.yaw
@@ -171,31 +170,18 @@ export default function InteractiveGlobe() {
           const y = ny * cosP - nz * sinP
           const x = nx * cosY + z1 * sinY
           const z = -nx * sinY + z1 * cosY
-          const lat = Math.asin(y), lon = Math.atan2(x, z)
-          const u = (lon + Math.PI) / (2 * Math.PI), vv = 0.5 - lat / Math.PI
-          const land = sample(mask, MW, MH, u, vv) / 255
-          const alat = Math.abs(lat) / rad
-
-          let r: number, g: number, b: number
-          if (land > 0.5) {
-            const desert = Math.max(0, 1 - Math.abs(alat - 24) / 12)
-            const ice = Math.max(0, Math.min(1, (alat - 62) / 8))
-            r = 66 + desert * 122; g = 108 + desert * 62; b = 58 + desert * 12
-            r += (240 - r) * ice; g += (244 - g) * ice; b += (248 - b) * ice
-          } else {
-            const shallow = Math.max(0, 1 - Math.abs(land - 0.5) * 6)
-            r = 14 + shallow * 20; g = 52 + shallow * 40; b = 112 + shallow * 34
-            const ice = Math.max(0, Math.min(1, (alat - 70) / 6))
-            r += (230 - r) * ice; g += (238 - g) * ice; b += (246 - b) * ice
-          }
+          const u = (Math.atan2(x, z) + Math.PI) / (2 * Math.PI), vv = 0.5 - Math.asin(y) / Math.PI
+          sampleRGB(tex, u, vv, rgb)
+          let r = rgb[0], g = rgb[1], b = rgb[2]
+          const ocean = b > r * 1.5 && b > g * 1.15 && r + g + b < 230
 
           let diff = nx * L[0] + ny * L[1] + nz * L[2]
           diff = Math.max(0, diff)
-          const light = 0.18 + 0.95 * diff
+          const light = 0.3 + 0.9 * diff
           const c = sample(clouds, CW, CH, u + v.clouds, vv) / 255
           const cloud = Math.min(1, c * 0.85) * 0.78
           r = r * (1 - cloud) + 250 * cloud; g = g * (1 - cloud) + 252 * cloud; b = b * (1 - cloud) + 255 * cloud
-          if (land <= 0.5) { const spec = Math.pow(Math.max(0, nx * 0.35 + ny * 0.3 + nz * 0.89), 24) * 0.5 * (1 - cloud); r += 255 * spec; g += 255 * spec; b += 255 * spec }
+          if (ocean) { const spec = Math.pow(Math.max(0, nx * 0.35 + ny * 0.3 + nz * 0.89), 24) * 0.5 * (1 - cloud); r += 255 * spec; g += 255 * spec; b += 255 * spec }
           const rim = Math.pow(1 - nz, 2.6)
           r = r * light + rim * 70; g = g * light + rim * 130; b = b * light + rim * 230
           d[o] = r > 255 ? 255 : r; d[o + 1] = g > 255 ? 255 : g; d[o + 2] = b > 255 ? 255 : b
@@ -244,7 +230,7 @@ export default function InteractiveGlobe() {
       })
     }
     raf = requestAnimationFrame(frame)
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect() }
+    return () => { cancelled = true; cancelAnimationFrame(raf); ro.disconnect(); io.disconnect() }
   }, [])
 
   function focusCity(i: number) {
@@ -279,7 +265,7 @@ export default function InteractiveGlobe() {
           </li>
         ))}
       </ul>
-      <p className="mt-2 text-center text-xs text-muted-foreground">Drag the globe, or pick a city to turn to it. Land shapes: Natural Earth, public domain.</p>
+      <p className="mt-2 text-center text-xs text-muted-foreground">Drag the globe, or pick a city to turn to it. Map: NASA satellite imagery, public domain.</p>
     </div>
   )
 }
