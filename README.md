@@ -59,3 +59,7 @@ For redistributable entries the repository reads `previews/<id>.tsx` from disk a
 1. Write the preview as `previews/<slug>.tsx` (default export, `"use client"`).
 2. Register it in `previews/registry.tsx`.
 3. Add an entry with `entry({...})` from `data/entries/define.ts` to `DRAFTS` in `data/entries/index.ts`.
+
+## License
+
+PlinthUI and the components authored for it are licensed under the Apache License 2.0. See `LICENSE`.
