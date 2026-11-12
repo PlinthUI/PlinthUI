@@ -32,7 +32,7 @@ export default function PricingCardsToggle({ variant = "monthly" }: PreviewProps
           Annual <span className="ml-1 rounded-md bg-primary/10 px-1.5 py-0.5 text-xs text-primary">20% off</span>
         </span>
       </div>
-      <ul className="grid gap-3 @xl:grid-cols-3">
+      <ul className="grid gap-3 @lg:grid-cols-3">
         {PLANS.map((p) => {
           const price = annual ? Math.round(p.monthly * 0.8) : p.monthly
           return (

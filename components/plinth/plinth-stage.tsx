@@ -62,18 +62,32 @@ function DetailStage({ width, children }: { width: StageWidth; children: React.R
 function CardStage({ kind, children }: { kind: "component" | "section"; children: React.ReactNode }) {
   const [viewRef, seen] = useInView<HTMLDivElement>()
   const box = useRef<HTMLDivElement | null>(null)
-  const [size, setSize] = useState({ w: 0, h: 0 })
-  const virtualWidth = kind === "section" ? 860 : 460
+  const inner = useRef<HTMLDivElement | null>(null)
+  const [box2, setBox2] = useState({ w: 0, h: 0 })
+  const [innerH, setInnerH] = useState(0)
+  const virtualWidth = kind === "section" ? 880 : 560
 
   useEffect(() => {
     const el = box.current
     if (!el) return
-    const ro = new ResizeObserver(([entry]) => setSize({ w: entry.contentRect.width, h: entry.contentRect.height }))
+    const ro = new ResizeObserver(([entry]) => setBox2({ w: entry.contentRect.width, h: entry.contentRect.height }))
     ro.observe(el)
     return () => ro.disconnect()
   }, [])
 
-  const scale = size.w ? size.w / virtualWidth : 0.5
+  useEffect(() => {
+    const el = inner.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => setInnerH(entry.borderBoxSize?.[0]?.blockSize ?? entry.contentRect.height))
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [seen])
+
+  // Fit the whole preview inside the card: never larger than the width fit, shrink more if it is tall.
+  const fitW = box2.w ? box2.w / virtualWidth : 0.5
+  const fitH = innerH && box2.h ? box2.h / innerH : fitW
+  const scale = Math.min(fitW, fitH, 1)
+
   return (
     <div
       ref={(el) => {
@@ -82,12 +96,13 @@ function CardStage({ kind, children }: { kind: "component" | "section"; children
       }}
       className="relative aspect-[16/10] w-full overflow-hidden"
     >
-      {seen && size.w > 0 ? (
+      {seen && box2.w > 0 ? (
         <div
+          ref={inner}
           inert
           aria-hidden
-          className="@container pointer-events-none absolute left-0 top-0 flex origin-top-left items-center justify-center p-6"
-          style={{ width: virtualWidth, height: size.h / scale, transform: `scale(${scale})` }}
+          className="@container pointer-events-none absolute left-1/2 top-1/2 flex items-center justify-center p-4"
+          style={{ width: virtualWidth, transform: `translate(-50%, -50%) scale(${scale})` }}
         >
           {children}
         </div>
