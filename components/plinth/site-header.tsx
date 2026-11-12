@@ -20,7 +20,7 @@ const NAV = [
 export function Logo() {
   return (
     <Link href="/" className="inline-flex min-h-11 items-center gap-2.5 rounded-md font-semibold tracking-tight" aria-label="PlinthUI home">
-      <Image src="/logo.jpg" alt="" width={32} height={32} priority className="size-8 rounded-md dark:invert" />
+      <Image src="/logo.svg" alt="" width={32} height={32} priority className="size-8 dark:invert" />
       PlinthUI
     </Link>
   )
