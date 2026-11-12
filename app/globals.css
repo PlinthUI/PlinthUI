@@ -52,8 +52,8 @@
   --card-foreground: #14171c;
   --popover: #fbfbfc;
   --popover-foreground: #14171c;
-  --primary: #3250c8;
-  --primary-foreground: #fbfbfc;
+  --primary: #0a0a0a;
+  --primary-foreground: #fafafa;
   --secondary: #eceef2;
   --secondary-foreground: #14171c;
   --muted: #eceef2;
@@ -63,7 +63,7 @@
   --destructive: #b4322f;
   --border: #dde1e8;
   --input: #c6ccd7;
-  --ring: #3250c8;
+  --ring: #0a0a0a;
   --success: #1f7a4d;
   --warning: #96600a;
   --stage: #eef0f4;

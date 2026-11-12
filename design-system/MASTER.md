@@ -73,3 +73,5 @@ Em dashes and en dash separators, eyebrow labels, three equal feature cards, div
 ## Dark theme override
 
 Dark mode is pure black (`#000000`) with neutral greys and no accent: `--primary` is near-white `#EDEDED` with black text. Light mode keeps the cobalt accent. Set by the owner after Phase 1.
+
+Light theme override: `--primary` is black `#0A0A0A` (buttons, links, focus ring) instead of cobalt. Both themes are now monochrome.
