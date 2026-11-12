@@ -7,6 +7,13 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
+    slug: "interactive-globe", title: "Interactive dot globe", category: "3D and Interactive",
+    summary: "A draggable canvas globe made of dots, with city markers, a pulsing selection and arcs to other cities. Pick a city to turn to it.",
+    tags: ["globe", "3d", "map", "canvas", "interactive"], synonyms: ["earth", "world map", "spinning globe", "destinations"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated",
+    popularity: 450, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
     slug: "combobox-search", title: "Searchable combobox", category: "Forms",
     summary: "Filterable listbox with active-descendant focus, arrow keys, Enter to choose and Escape to close.",
     tags: ["select","autocomplete","combobox","search"], synonyms: ["typeahead","dropdown search","picker"],

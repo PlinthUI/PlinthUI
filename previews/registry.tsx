@@ -61,6 +61,7 @@ export const previewRegistry: Record<string, ComponentType<PreviewProps>> = {
   "avatar-stack": dynamic(() => import("./avatar-stack"), { ssr: false, loading: Loading }),
   "segmented-control": dynamic(() => import("./segmented-control"), { ssr: false, loading: Loading }),
   "toast-stack": dynamic(() => import("./toast-stack"), { ssr: false, loading: Loading }),
+  "interactive-globe": dynamic(() => import("./interactive-globe"), { ssr: false, loading: Loading }),
   "marquee-footer": dynamic(() => import("./marquee-footer"), { ssr: false, loading: Loading }),
   "portfolio-hero": dynamic(() => import("./portfolio-hero"), { ssr: false, loading: Loading }),
   "proof-stats": dynamic(() => import("./proof-stats"), { ssr: false, loading: Loading }),
