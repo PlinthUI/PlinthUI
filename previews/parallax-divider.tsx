@@ -8,8 +8,8 @@ export default function ParallaxDivider() {
   const ref = useRef<HTMLElement>(null)
   const reduce = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
-  const far = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"])
-  const near = useTransform(scrollYProgress, [0, 1], ["30%", "-30%"])
+  const far = useTransform(scrollYProgress, [0, 1], ["-22%", "22%"])
+  const near = useTransform(scrollYProgress, [0, 1], ["70%", "-70%"])
   return (
     <div className="mx-auto w-full max-w-2xl">
       <p className="mb-4 text-muted-foreground">Above the divider, the page continues as normal text.</p>
@@ -23,6 +23,7 @@ export default function ParallaxDivider() {
         <h3 className="rounded-lg bg-neutral-950/60 px-4 py-2 text-3xl font-semibold tracking-tight text-neutral-50 backdrop-blur">Two layers, two speeds</h3>
       </section>
       <p className="mt-4 text-muted-foreground">Below it, the story picks up again.</p>
+      {reduce && <p role="note" className="mt-3 rounded-lg border px-3 py-2 text-sm">Motion is off because your system asks for reduced motion, so the layers stay still.</p>}
     </div>
   )
 }

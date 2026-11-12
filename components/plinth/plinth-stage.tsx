@@ -52,7 +52,7 @@ export function PlinthStage({ previewId, variant, mode = "detail", width = "full
 function DetailStage({ width, children }: { width: StageWidth; children: React.ReactNode }) {
   const px = STAGE_WIDTHS[width].px
   return (
-    <div className="flex min-h-[22rem] items-center justify-center overflow-x-auto p-4 sm:p-8">
+    <div className={cn("flex min-h-[22rem] items-center justify-center p-4 sm:p-8", px ? "overflow-x-auto" : "overflow-x-clip")}>
       <div key={width} className="@container w-full animate-in fade-in duration-200" style={{ maxWidth: px ?? "100%" }}>
         {children}
       </div>
