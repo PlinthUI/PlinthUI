@@ -7,10 +7,10 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
-    slug: "portfolio-hero", title: "Portfolio hero", kind: "section", category: "Landing Page Sections",
-    summary: "Name, role chips and two actions beside a collapsible Now building card. Rebuilt from shreekumarb.vercel.app.",
-    tags: ["hero", "portfolio", "landing", "personal site"], synonyms: ["banner", "intro", "above the fold"],
-    source: "shreekumar-b", author: "shreekumar", style: "bold", deps: ["lucide-react"],
+    slug: "portfolio-hero", title: "Parallax photo hero", kind: "section", category: "Landing Page Sections",
+    summary: "Full-bleed photo hero with layered scroll parallax: background, floating portraits and text each move at their own speed. Static for reduced motion.",
+    tags: ["hero", "portfolio", "landing", "parallax", "scroll"], synonyms: ["banner", "intro", "above the fold", "parallax hero", "animated"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["lucide-react", "motion"],
     popularity: 500, created: "2026-11-12", updated: "2026-11-12",
   }),
   entry({
