@@ -1,6 +1,7 @@
 import { ComponentEntrySchema, type ComponentEntry } from "@/lib/schema"
 import { entry } from "./define"
 import { PIN_ENTRIES } from "./pin-ui"
+import { MP_ENTRIES } from "./motion-primitives"
 
 /**
  * Add entries here, built with entry() from ./define. Parsed once so a
@@ -506,4 +507,4 @@ const DRAFTS: unknown[] = [
   }),
 ]
 
-export const ENTRIES: ComponentEntry[] = [...PIN_ENTRIES, ...DRAFTS].map((e) => ComponentEntrySchema.parse(e))
+export const ENTRIES: ComponentEntry[] = [...PIN_ENTRIES, ...MP_ENTRIES, ...DRAFTS].map((e) => ComponentEntrySchema.parse(e))

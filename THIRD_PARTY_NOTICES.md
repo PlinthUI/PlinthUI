@@ -38,3 +38,36 @@ Folders containing Pin UI components: `components/audio`, `components/cards`, `c
 `components/interactive/desk-computer-engine.ts` also carries its own upstream credit inside the file (a link to https://github.com/wheresryan22/anatomy). That credit must stay with the file.
 
 Per the Pin UI terms, these components are credited to their author and are not presented as PlinthUI's own work.
+
+## Motion-Primitives components
+
+Components in `components/motion/` come from **Motion-Primitives** by **ibelick**.
+
+- Source: https://github.com/ibelick/motion-primitives and https://motion-primitives.com
+- Licence: MIT. The repository README states it is MIT licensed, and its licence file reads:
+
+```
+MIT License
+
+Copyright (c) 2024 ibelick
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+The 33 files are kept unmodified apart from a source header and, where React 19 typings reject upstream React 18 types, a `// @ts-nocheck` line (types only, no runtime change). The two hooks in `hooks/` (`useClickOutside`, `usePreventScroll`) were not in the supplied source and were written for this project. The preview demos in `previews/mp-*.tsx` are original to this project. The docs-site files in the supplied folder (header, logos, code viewers) were not imported.
