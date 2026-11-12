@@ -30,7 +30,7 @@ const LICENSE_SUMMARY: Record<string, string> = {
   Proprietary: "Not open source. Reuse is governed by the source's own terms. PlinthUI does not display or redistribute the code.",
 }
 
-export function Workbench({ entry, codeHtml, codeText }: { entry: ComponentEntry; codeHtml: string | null; codeText: string | null }) {
+export function Workbench({ entry, codeFiles }: { entry: ComponentEntry; codeFiles: { path: string; html: string; code: string }[] }) {
   const [tab, setTab] = useState<TabId>("preview")
   const [width, setWidth] = useState<StageWidth>("full")
   const [variant, setVariant] = useState(entry.variants?.[0]?.id)
@@ -141,8 +141,8 @@ export function Workbench({ entry, codeHtml, codeText }: { entry: ComponentEntry
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-3">
-            {entry.files.map((f) => (
-              <CodeBlock key={f.path} path={f.path} html={codeHtml ?? ""} code={codeText ?? ""} />
+            {codeFiles.map((f) => (
+              <CodeBlock key={f.path} path={f.path} html={f.html} code={f.code} />
             ))}
             <p className="text-sm text-muted-foreground">Imports use the default shadcn alias. Adjust the paths to your project.</p>
           </div>
