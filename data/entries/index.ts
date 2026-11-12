@@ -7,10 +7,10 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
-    slug: "interactive-globe", title: "Interactive dot globe", category: "3D and Interactive",
-    summary: "A draggable canvas globe made of dots, with city markers, a pulsing selection and arcs to other cities. Pick a city to turn to it.",
-    tags: ["globe", "3d", "map", "canvas", "interactive"], synonyms: ["earth", "world map", "spinning globe", "destinations"],
-    source: "shreekumar-b", author: "shreekumar", style: "animated",
+    slug: "interactive-globe", title: "Interactive Earth globe", category: "3D and Interactive",
+    summary: "A drag-to-spin Earth with real continents, lit oceans, ice caps, moving clouds and an atmosphere glow, plus city markers and arcs. Land shapes are public domain Natural Earth data.",
+    tags: ["globe", "earth", "3d", "map", "canvas", "interactive"], synonyms: ["planet", "world map", "spinning globe", "destinations"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["topojson-client", "world-atlas"],
     popularity: 450, created: "2026-11-12", updated: "2026-11-12",
   }),
   entry({
