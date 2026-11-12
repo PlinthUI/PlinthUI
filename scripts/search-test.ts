@@ -17,7 +17,8 @@ const cases: [string, string, number][] = [
   ["parallax", "parallax-divider", 4],
   ["typing animation", "typewriter-text", 2],
   ["skeleton", "skeleton-loader", 1],
-  ["countdown", "landing-launch", 1],
+  ["countdown", "session-countdown", 1],
+  ["countdown", "landing-launch", 3],
   ["upload", "file-dropzone", 1],
 ]
 
