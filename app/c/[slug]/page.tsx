@@ -2,16 +2,14 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { codeToHtml } from "shiki"
-import { ChevronRight, Lock } from "lucide-react"
+import { ChevronRight } from "lucide-react"
 import { DetailActions } from "@/components/plinth/detail-actions"
 import { ItemCard } from "@/components/plinth/item-card"
 import { Outline } from "@/components/plinth/outline"
 import { Workbench } from "@/components/plinth/workbench"
-import { SOURCE_BY_ID } from "@/data/sources"
 import { buildAgentPrompt } from "@/lib/agent-prompt"
 import { categorySlug } from "@/lib/categories"
 import { repository } from "@/lib/repository"
-import { isNewEntry } from "@/lib/time"
 import { cn } from "@/lib/utils"
 
 type Params = { slug: string }
@@ -35,7 +33,6 @@ export default async function ComponentPage({ params }: { params: Promise<Params
 
   const [related, all] = await Promise.all([repository.related(slug, 4), repository.list()])
   const siblings = all.filter((e) => e.category === entry.category)
-  const source = SOURCE_BY_ID[entry.provenance.sourceId]
   const codeFiles = await Promise.all(
     entry.files
       .filter((f) => f.code)
@@ -80,20 +77,6 @@ export default async function ComponentPage({ params }: { params: Promise<Params
         <header className="mb-8">
           <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">{entry.title}</h1>
           <p className="mt-2 max-w-prose text-lg text-muted-foreground">{entry.summary}</p>
-          <ul className="mt-4 flex flex-wrap gap-1.5 text-xs">
-            {isNewEntry(entry.updatedAt) && <li className="rounded-md bg-primary/10 px-2 py-1 font-medium text-primary">New</li>}
-            <li className="inline-flex items-center gap-1 rounded-md border px-2 py-1">
-              {!entry.provenance.redistributable && <Lock className="size-3" aria-hidden />}
-              {entry.provenance.redistributable ? "Open source" : "Premium"}
-            </li>
-            <li className="rounded-md border px-2 py-1">{source?.name}</li>
-            <li className="rounded-md border px-2 py-1">{entry.provenance.license}</li>
-            {entry.frameworks.map((f) => (
-              <li key={f} className="rounded-md border px-2 py-1">
-                {f}
-              </li>
-            ))}
-          </ul>
           <div className="mt-5">
             <DetailActions slug={entry.slug} title={entry.title} prompt={buildAgentPrompt(entry)} />
           </div>

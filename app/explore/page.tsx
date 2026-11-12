@@ -15,7 +15,7 @@ export default async function ExplorePage() {
     <>
       <div className="mx-auto max-w-[1400px] px-4 pt-10 sm:px-6">
         <h1 className="text-3xl font-semibold tracking-tight">Explore</h1>
-        <p className="mt-1 max-w-prose text-muted-foreground">Every entry shows its source and license next to the preview.</p>
+        <p className="mt-1 max-w-prose text-muted-foreground">Filter by category, source, license kind, framework and style.</p>
       </div>
       <Suspense fallback={<ExploreSkeleton />}>
         <Explorer entries={entries} />
