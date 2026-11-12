@@ -19,7 +19,7 @@ export default async function SourcesPage() {
       <h1 className="text-3xl font-semibold tracking-tight">Sources</h1>
       <p className="mt-1 max-w-prose text-muted-foreground">Every entry credits where it came from. Source names here are labels in demo data, not endorsements.</p>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_22rem]">
+      <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_22rem]">
         <div className="overflow-x-auto rounded-xl border bg-card">
           <table className="w-full min-w-[34rem] text-left text-sm">
             <caption className="sr-only">Sources and their entry counts</caption>

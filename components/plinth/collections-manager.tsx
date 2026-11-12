@@ -61,7 +61,7 @@ export function CollectionsManager() {
   }
 
   return (
-    <div className="mx-auto grid max-w-[1400px] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]">
+    <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]">
       <aside aria-label="Your collections" className="grid content-start gap-5">
         {collectionsApi.isBlocked() && (
           <p role="alert" className="flex gap-2 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm">
@@ -163,7 +163,7 @@ export function CollectionsManager() {
         </p>
 
         {items.length === 0 ? (
-          <div className="mt-6 grid gap-6 rounded-xl border border-dashed p-6 md:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-6 rounded-xl border border-dashed p-6 md:grid-cols-2">
             <div>
               <Bookmark className="size-7 text-muted-foreground" aria-hidden />
               <h3 className="mt-3 text-lg font-semibold">This collection is empty</h3>
@@ -223,7 +223,7 @@ export function CollectionsManager() {
 
 export function CollectionsSkeleton() {
   return (
-    <div className="mx-auto grid max-w-[1400px] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]" role="status" aria-label="Loading collections">
+    <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]" role="status" aria-label="Loading collections">
       <div className="space-y-2" aria-hidden>
         {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="h-11 animate-pulse rounded-lg bg-muted/70" />

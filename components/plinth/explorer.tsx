@@ -135,7 +135,7 @@ export function Explorer({ entries }: { entries: EntryCard[] }) {
   const rail = <FilterRail facets={facets} selected={selected} onToggle={toggle} idPrefix={sheetOpen ? "sheet" : "rail"} />
 
   return (
-    <div className="mx-auto grid max-w-[1400px] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[16rem_1fr]">
+    <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[16rem_1fr]">
       <aside aria-label="Filters" className="hidden lg:block">
         <div className="sticky top-24 max-h-[calc(100dvh-7rem)] overflow-y-auto pr-2">{rail}</div>
       </aside>

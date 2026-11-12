@@ -25,7 +25,7 @@ export default async function Home() {
   return (
     <>
       {/* 1. Hero: asymmetric split with a live plinth */}
-      <section className="mx-auto grid min-h-[100dvh] max-w-[1400px] items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[6fr_7fr] lg:py-16">
+      <section className="mx-auto grid min-h-[100dvh] max-w-[1400px] grid-cols-1 items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[6fr_7fr] lg:py-16">
         <div className="grid justify-items-start gap-6">
           <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[2.75rem] xl:text-5xl">Compare UI components before you commit</h1>
           <p className="max-w-md text-lg text-muted-foreground">Search many libraries, preview each on one stage, and read the source and license first.</p>
@@ -105,7 +105,7 @@ export default async function Home() {
       </section>
 
       {/* 5. Compare teaser: table beside text */}
-      <section aria-labelledby="cmp-heading" className="mx-auto grid max-w-[1400px] gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[2fr_3fr]">
+      <section aria-labelledby="cmp-heading" className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[2fr_3fr]">
         <div className="grid content-start gap-4">
           <h2 id="cmp-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl">Three pricing tables, one width</h2>
           <p className="max-w-md text-muted-foreground">Put up to three implementations on their own plinths, switch every preview to phone width at once, and read the differences underneath.</p>
@@ -148,7 +148,7 @@ export default async function Home() {
       {/* 6. Open source versus premium, with sources */}
       <section aria-labelledby="policy-heading" className="mx-auto max-w-[1400px] px-4 pb-8 pt-4 sm:px-6">
         <h2 id="policy-heading" className="max-w-2xl text-2xl font-semibold tracking-tight sm:text-3xl">Open source shows code. Premium links out.</h2>
-        <div className="mt-8 grid gap-4 lg:grid-cols-[3fr_2fr]">
+        <div className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-[3fr_2fr]">
           <div className="rounded-xl border bg-card p-6">
             <h3 className="text-lg font-semibold">Open source entries</h3>
             <p className="mt-1 text-sm text-muted-foreground tnum">{open} entries under MIT, Apache-2.0 or ISC</p>

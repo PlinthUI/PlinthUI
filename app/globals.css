@@ -138,7 +138,12 @@
 
 @layer components {
   /* PlinthStage anatomy: lit stage, raised base slab, plaque */
+  .plinth {
+    display: flex;
+    flex-direction: column;
+  }
   .plinth-stage {
+    flex: 1 1 auto;
     position: relative;
     background:
       radial-gradient(110% 80% at 50% -12%, var(--stage-glow), transparent 62%),
