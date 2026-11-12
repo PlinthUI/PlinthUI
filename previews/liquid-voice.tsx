@@ -5,7 +5,7 @@ import LiquidVoice from "@/components/audio/LiquidVoice"
 import type { PreviewProps } from "./types"
 
 /** Thin preview wrapper. The component itself lives in components/audio/. */
-export default function LiquidVoicePreview({ variant }: PreviewProps) {
+export default function Preview({ variant }: PreviewProps) {
   const { resolvedTheme } = useTheme()
   const theme = variant === "dark" || variant === "light" ? variant : resolvedTheme === "dark" ? "dark" : "light"
   return (

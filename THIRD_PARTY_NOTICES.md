@@ -33,4 +33,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
+Folders containing Pin UI components: `components/audio`, `components/cards`, `components/interactive`, `components/forms`, `components/lists`, `components/blocks`. These files are kept unmodified apart from a source header, and are excluded from linting for that reason.
+
+`components/interactive/desk-computer-engine.ts` also carries its own upstream credit inside the file (a link to https://github.com/wheresryan22/anatomy). That credit must stay with the file.
+
 Per the Pin UI terms, these components are credited to their author and are not presented as PlinthUI's own work.

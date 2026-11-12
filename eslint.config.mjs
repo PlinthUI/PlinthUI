@@ -18,6 +18,12 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
+      // Vendored MIT components from Pin UI are kept unmodified, so they are not linted.
+      "components/audio/**",
+      "components/cards/**",
+      "components/interactive/**",
+      "components/forms/**",
+      "components/lists/**",
     ],
   },
 ];
