@@ -42,3 +42,23 @@ This list comes from the component names supplied by the project owner. It is a 
 | session-list | Count down | components/lists | Complete |  |
 
 "Complete" means: integrated, type checked, built, and rendered with content in the browser. Interactions were not individually exercised except Liquid Voice. Light and dark variants exist where the component has a theme prop.
+
+## Blocx page sections (from the supplied source folder)
+
+Source: `/home/Shreekumar/Pictures/components/blocks/demo`. The supplied `library/` folder was byte-identical to the registry components above, so it added nothing new. Site chrome (headers, footers, hero wall, ads, waitlist, legal pages, Pin UI marks) was deliberately not imported.
+
+| ID | Name | Status | Notes |
+|---|---|---|---|
+| halo-sign-in | Halo sign in | Complete | Renders with no broken images |
+| luna-hero | Luna storefront hero | Complete | Needs @phosphor-icons/react. Preview wrapper blocks link navigation |
+| odometer-pricing | Odometer pricing | Complete | |
+| pixelkit-sign-in | Pixelkit sign in | Complete | |
+| synais-footer | Synais footer | Complete | |
+| partylabs-hero | Party labs hero | BLOCKED | Needs about 25 images at /blocx/partylabs-hero/*.webp, not supplied. Code copied to components/blocks, no catalogue entry |
+| smart-pricing | Smart pricing | BLOCKED | Needs SVG art at /blocx/smart-pricing/*.svg (knob, union, dot), not supplied. Code copied, no catalogue entry |
+| storybook-hero | Storybook hero | BLOCKED | Needs /blocx/storybook-hero/logo.svg and illustration.webp, not supplied. Code copied, no catalogue entry |
+| caremetric-footer | Caremetric footer | BLOCKED | Needs logo.svg and texture.webp. Not copied |
+| contact-form | Contact form | BLOCKED | Needs /blocx/contact-form/hand.webp. Not copied |
+| orbit-hero | Orbit hero | BLOCKED | Needs clouds, earth, logo and surface webp files. Not copied |
+
+Each blocked item can be finished by supplying its asset files under `public/blocx/<name>/` and adding the catalogue entry back.
