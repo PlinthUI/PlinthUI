@@ -31,6 +31,7 @@ npm install
 npm run dev        # http://localhost:3000
 npm run typecheck  # tsc --noEmit
 npm run lint
+npm run test:search  # search acceptance test
 npm run build && npm start
 ```
 
