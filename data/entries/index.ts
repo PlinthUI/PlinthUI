@@ -7,6 +7,34 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
+    slug: "landing-devtool", title: "Developer tool landing page", kind: "section", category: "Landing Pages",
+    summary: "Navbar, centered hero, tabbed features, billing toggle pricing and FAQ in one page.",
+    tags: ["landing page","saas","developer tool","pricing","faq"], synonyms: ["template","homepage","marketing site"],
+    source: "shreekumar-b", author: "shreekumar", style: "minimal", deps: ["lucide-react"],
+    popularity: 420, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "landing-studio", title: "Design studio landing page", kind: "section", category: "Landing Pages",
+    summary: "Oversized type hero, filterable work grid with image hover, process list and a bold closing call. Images are seeded stock.",
+    tags: ["landing page","agency","portfolio","studio","gallery"], synonyms: ["template","homepage","creative studio"],
+    source: "shreekumar-b", author: "shreekumar", style: "bold", deps: ["lucide-react"],
+    popularity: 420, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "landing-launch", title: "Product launch landing page", kind: "section", category: "Landing Pages",
+    summary: "Parallax photo hero with a live countdown, spec strip and pre-order form.",
+    tags: ["landing page","product launch","countdown","parallax","pre-order"], synonyms: ["template","coming soon","waitlist page"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["lucide-react", "motion"],
+    popularity: 420, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "landing-event", title: "Conference landing page", kind: "section", category: "Landing Pages",
+    summary: "Photo hero, day tabbed schedule, speaker grid and a ticket picker with a running total.",
+    tags: ["landing page","event","conference","schedule","tickets"], synonyms: ["template","summit","meetup page"],
+    source: "shreekumar-b", author: "shreekumar", style: "bold", deps: ["lucide-react"],
+    popularity: 420, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
     slug: "sidebar-nav", title: "Collapsible sidebar", category: "Navigation", kind: "component",
     summary: "App sidebar with grouped links that collapses to an icon rail and keeps labels for screen readers.",
     tags: ["sidebar","navigation","app shell","rail"], synonyms: ["side nav","menu panel"],

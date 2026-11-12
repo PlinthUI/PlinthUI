@@ -7,6 +7,7 @@ export const CATEGORIES = [
   { id: "Overlays", blurb: "Dialogs, drawers, menus" },
   { id: "Marketing UI", blurb: "Pricing, testimonials" },
   { id: "Landing Page Sections", blurb: "Heroes, FAQs, feature blocks" },
+  { id: "Landing Pages", blurb: "Complete page templates" },
   { id: "Dashboard UI", blurb: "Boards and metrics" },
   { id: "Authentication", blurb: "Sign in, sign up, verification" },
   { id: "Effects and Animations", blurb: "Pointer, motion, reveal" },
