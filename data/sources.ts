@@ -2,6 +2,7 @@ import type { Source } from "@/lib/schema"
 
 export const SOURCES: Source[] = [
   { id: "shreekumar-b", name: "Shreekumar B", url: "https://shreekumarb.vercel.app", license: "Apache-2.0", premium: false, note: "Components written by the author." },
+  { id: "animata", name: "Animata", url: "https://animata.design", license: "MIT", premium: false, note: "Animated React components, MIT licensed." },
   { id: "motion-primitives", name: "Motion-Primitives", url: "https://motion-primitives.com", license: "MIT", premium: false, note: "Animated React primitives by ibelick, MIT licensed." },
   { id: "pin-ui", name: "Pin UI", url: "https://www.pinui.xyz", license: "MIT", premium: false, note: "Components by Rachit Thakur, MIT licensed. Name, mark and demo media are not included." },
   { id: "shadcn-ui", name: "shadcn/ui", url: "https://ui.shadcn.com", license: "MIT", premium: false, note: "Open source. Code is shown and can be copied." },

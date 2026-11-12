@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic"
 import type { ComponentType } from "react"
 import type { PreviewProps } from "./types"
+import { animataRegistry } from "./animata-registry"
 
 function Loading() {
   return <div className="h-40 w-full max-w-sm animate-pulse rounded-lg bg-muted" aria-hidden />
@@ -13,6 +14,7 @@ function Loading() {
  * without touching any page or card. Add one line per component.
  */
 export const previewRegistry: Record<string, ComponentType<PreviewProps>> = {
+  ...animataRegistry,
   "typewriter-text": dynamic(() => import("./typewriter-text"), { ssr: false, loading: Loading }),
   "spotlight-card": dynamic(() => import("./spotlight-card"), { ssr: false, loading: Loading }),
   "tilt-card": dynamic(() => import("./tilt-card"), { ssr: false, loading: Loading }),

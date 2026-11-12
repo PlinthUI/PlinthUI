@@ -26,6 +26,8 @@ const eslintConfig = [
       "components/lists/**",
       "components/blocks/**",
       "components/motion/**",
+      "animata/**",
+      "components/shapes/**",
     ],
   },
 ];

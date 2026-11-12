@@ -62,3 +62,49 @@ Source: `/home/Shreekumar/Pictures/components/blocks/demo`. The supplied `librar
 | orbit-hero | Orbit hero | BLOCKED | Needs clouds, earth, logo and surface webp files. Not copied |
 
 Each blocked item can be finished by supplying its asset files under `public/blocx/<name>/` and adding the catalogue entry back.
+
+## Animata components (MIT, from the supplied repository)
+
+Supplied source: `/home/Shreekumar/Downloads/animata-main`. 213 component files were copied into `animata/` (kept in its own folder structure so internal `@/animata/...` imports keep working). Each component's default export is its own preview. Left out entirely: `hero-section`, `video-chat`, `clock-with-photo`, `music-widget`, `profile`, `orbiting-items`, `orbiting-items-3-d` (they depend on Animata media, logos or removed brand icons). The remaining sub-files of compound components (for example `preloader/split-reveal/*`) are support code, not separate entries.
+
+Catalogued entries: **159** (prefixed `an-`). Rendered with content in the browser and without error boundaries: all 159.
+
+Code present in `animata/` but **not** in the catalogue (33):
+
+| Component | Reason |
+|---|---|
+| animata/accordion/faq | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/card-stack | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/comment-reply-card | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/notification-card | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/notify-user-info | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/reminder-scheduler | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/score-card | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/survey-card | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/card/swap-text-card | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/carousel/image-carousel | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/container/animated-dock | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/container/nav-tabs | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/fabs/flower-menu | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/feature/cards-confirmation-message | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/feature/cards-content-scan | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/graphs/bar-chart | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/image/photo-booth | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/list/menu-animation | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/list/transaction-list | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/text/circular-text | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/text/gibberish-text | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/text/swap-text | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/text/text-animator | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/text/typing-text | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/widget/music-stack-interaction | Default export needs example props (crashes with none). Props are in the upstream story file |
+| animata/widget/direction-card | Preview never finishes loading |
+| animata/widget/vpn-widget | Preview never finishes loading |
+| animata/card/swap-card | Image component with no source supplied by default |
+| animata/image/disclose-image | Image component with no source supplied by default |
+| animata/image/image-box-shadow | Image component with no source supplied by default |
+| animata/image/skew-image | Image component with no source supplied by default |
+| animata/image/zoom-image | Image component with no source supplied by default |
+| animata/widget/flight-widget | Hotlinks a third-party brand logo that does not load |
+
+To finish any of these, wrap it in a preview that passes the example props from its `*.stories.tsx` in the upstream repository, then add its entry back.
