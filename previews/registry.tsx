@@ -150,6 +150,7 @@ export const previewRegistry: Record<string, ComponentType<PreviewProps>> = {
   "mp-toolbar-expandable": dynamic(() => import("./mp-toolbar-expandable"), { ssr: false, loading: Loading }),
   "mp-transition-panel": dynamic(() => import("./mp-transition-panel"), { ssr: false, loading: Loading }),
   "flow-background": dynamic(() => import("./flow-background"), { ssr: false, loading: Loading }),
+  "flux-contours": dynamic(() => import("./flux-contours"), { ssr: false, loading: Loading }),
   "marquee-footer": dynamic(() => import("./marquee-footer"), { ssr: false, loading: Loading }),
   "portfolio-hero": dynamic(() => import("./portfolio-hero"), { ssr: false, loading: Loading }),
   "proof-stats": dynamic(() => import("./proof-stats"), { ssr: false, loading: Loading }),

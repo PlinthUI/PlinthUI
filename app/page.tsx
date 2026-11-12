@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, Lock } from "lucide-react"
-import { FlowBackground } from "@/components/plinth/flow-background"
+import { FluxContours } from "@/components/plinth/flux-contours"
 import { HeroSearch } from "@/components/plinth/hero-search"
 import { ItemCard } from "@/components/plinth/item-card"
 import { PlinthStage } from "@/components/plinth/plinth-stage"
@@ -27,7 +27,7 @@ export default async function Home() {
       {/* 1. Hero: asymmetric split with a live plinth */}
       <div className="relative isolate overflow-hidden">
         <div aria-hidden className="absolute inset-0 -z-10 opacity-80 [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]">
-          <FlowBackground reveal />
+          <FluxContours reveal />
         </div>
         <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/60 to-transparent lg:via-background/40" />
       <section className="mx-auto grid min-h-[100dvh] max-w-[1400px] grid-cols-1 items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[6fr_7fr] lg:py-16">
