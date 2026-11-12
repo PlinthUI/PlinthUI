@@ -61,14 +61,14 @@ export function CollectionsManager() {
   }
 
   return (
-    <div className="mx-auto grid max-w-[1400px] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]">
+    <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]">
       <aside aria-label="Your collections" className="grid content-start gap-5">
         {collectionsApi.isBlocked() && (
           <p role="alert" className="flex gap-2 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm">
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden /> Browser storage is blocked. Collections last until you close this tab. Export to keep them.
           </p>
         )}
-        <ul className="grid gap-1">
+        <ul className="grid grid-cols-1 gap-1">
           {collections.map((c) => (
             <li key={c.id}>
               <button type="button" aria-current={c.id === active.id ? "true" : undefined} onClick={() => setActiveId(c.id)} className={cn("flex min-h-11 w-full items-center justify-between rounded-lg px-3 text-left text-sm", c.id === active.id ? "bg-secondary font-medium" : "hover:bg-accent")}>
@@ -81,7 +81,7 @@ export function CollectionsManager() {
             </li>
           ))}
         </ul>
-        <form onSubmit={create} className="grid gap-2">
+        <form onSubmit={create} className="grid grid-cols-1 gap-2">
           <label htmlFor="new-collection" className="text-sm font-medium">
             New collection
           </label>
@@ -92,7 +92,7 @@ export function CollectionsManager() {
             </Button>
           </div>
         </form>
-        <div className="grid gap-2 border-t pt-5">
+        <div className="grid grid-cols-1 gap-2 border-t pt-5">
           <p className="text-sm font-medium">Backup</p>
           <Button variant="outline" onClick={exportJson}>
             <Download aria-hidden /> Export JSON
@@ -163,7 +163,7 @@ export function CollectionsManager() {
         </p>
 
         {items.length === 0 ? (
-          <div className="mt-6 grid gap-6 rounded-xl border border-dashed p-6 md:grid-cols-2">
+          <div className="mt-6 grid grid-cols-1 gap-6 rounded-xl border border-dashed p-6 md:grid-cols-2">
             <div>
               <Bookmark className="size-7 text-muted-foreground" aria-hidden />
               <h3 className="mt-3 text-lg font-semibold">This collection is empty</h3>
@@ -178,7 +178,7 @@ export function CollectionsManager() {
           <>
             <ul className="mt-6 grid gap-x-5 gap-y-9 sm:grid-cols-2 xl:grid-cols-3">
               {items.map((e, i) => (
-                <li key={e.slug} className="grid gap-2">
+                <li key={e.slug} className="grid grid-cols-1 gap-2">
                   <ItemCard entry={e} index={i} />
                   <Button variant="outline" size="sm" className="justify-self-start" onClick={() => collectionsApi.removeItem(active.id, e.slug)}>
                     <X aria-hidden /> Remove from {active.name}
@@ -223,7 +223,7 @@ export function CollectionsManager() {
 
 export function CollectionsSkeleton() {
   return (
-    <div className="mx-auto grid max-w-[1400px] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]" role="status" aria-label="Loading collections">
+    <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[18rem_1fr]" role="status" aria-label="Loading collections">
       <div className="space-y-2" aria-hidden>
         {Array.from({ length: 4 }).map((_, i) => (
           <div key={i} className="h-11 animate-pulse rounded-lg bg-muted/70" />

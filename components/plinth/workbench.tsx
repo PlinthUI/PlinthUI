@@ -140,7 +140,7 @@ export function Workbench({ entry, codeHtml, codeText }: { entry: ComponentEntry
             </a>
           </div>
         ) : (
-          <div className="grid gap-3">
+          <div className="grid grid-cols-1 gap-3">
             {entry.files.map((f) => (
               <CodeBlock key={f.path} path={f.path} html={codeHtml ?? ""} code={codeText ?? ""} />
             ))}

@@ -53,7 +53,7 @@ export function CompareView({ items }: { items: CompareItem[] }) {
 
   if (items.length === 0) {
     return (
-      <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_24rem]">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_24rem]">
         <section>
           <div className="grid place-items-center rounded-xl border border-dashed px-6 py-16 text-center">
             <GitCompareArrows className="size-8 text-muted-foreground" aria-hidden />
@@ -106,7 +106,7 @@ export function CompareView({ items }: { items: CompareItem[] }) {
 
       <ul className="-mx-4 mt-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:snap-none lg:grid-cols-3 lg:overflow-visible lg:px-0" aria-label="Items being compared">
         {items.map((i) => (
-          <li key={i.entry.slug} className="w-[88%] shrink-0 snap-center sm:w-[70%] lg:w-auto">
+          <li key={i.entry.slug} className="flex w-[88%] shrink-0 snap-center flex-col sm:w-[70%] lg:w-auto">
             <div className="mb-3 flex items-start justify-between gap-2">
               <div className="min-w-0">
                 <h2 className="truncate text-base font-semibold">
@@ -120,7 +120,7 @@ export function CompareView({ items }: { items: CompareItem[] }) {
                 <X aria-hidden />
               </Button>
             </div>
-            <PlinthStage previewId={i.entry.previewId} width={width} plaque={<Plaque entry={i.entry} />} />
+            <PlinthStage className="flex-1" previewId={i.entry.previewId} width={width} plaque={<Plaque entry={i.entry} />} />
           </li>
         ))}
         {items.length < MAX_COMPARE && (

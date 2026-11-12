@@ -2,7 +2,7 @@ import { ItemCardSkeleton } from "./item-card"
 
 export function ExploreSkeleton() {
   return (
-    <div className="mx-auto grid max-w-[1400px] gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[16rem_1fr]" role="status" aria-label="Loading components">
+    <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[16rem_1fr]" role="status" aria-label="Loading components">
       <div className="hidden space-y-3 lg:block" aria-hidden>
         {Array.from({ length: 12 }).map((_, i) => (
           <div key={i} className="h-8 animate-pulse rounded-md bg-muted/70" />

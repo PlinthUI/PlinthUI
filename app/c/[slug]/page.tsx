@@ -40,7 +40,7 @@ export default async function ComponentPage({ params }: { params: Promise<Params
   const codeHtml = code ? await codeToHtml(code, { lang: "tsx", themes: { light: "github-light", dark: "github-dark" }, defaultColor: false }) : null
 
   return (
-    <div className="mx-auto grid max-w-[1400px] gap-10 px-4 py-8 sm:px-6 xl:grid-cols-[14rem_minmax(0,1fr)_12rem]">
+    <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-4 py-8 sm:px-6 xl:grid-cols-[14rem_minmax(0,1fr)_12rem]">
       <aside aria-label="In this category" className="hidden xl:block">
         <nav className="sticky top-24 text-sm">
           <Link href={`/explore?category=${encodeURIComponent(entry.category)}`} className="mb-2 inline-flex min-h-9 items-center font-medium hover:text-primary">
