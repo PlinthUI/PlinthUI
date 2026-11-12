@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
@@ -19,10 +20,7 @@ const NAV = [
 export function Logo() {
   return (
     <Link href="/" className="inline-flex min-h-11 items-center gap-2.5 rounded-md font-semibold tracking-tight" aria-label="PlinthUI home">
-      <span aria-hidden className="flex flex-col items-center">
-        <span className="h-3.5 w-5 rounded-t-[4px] border border-foreground/80 bg-card" />
-        <span className="h-1.5 w-6 rounded-b-[3px] bg-foreground" />
-      </span>
+      <Image src="/logo.jpg" alt="" width={32} height={32} priority className="size-8 rounded-md dark:invert" />
       PlinthUI
     </Link>
   )
