@@ -8,8 +8,8 @@ import { entry } from "./define"
 const DRAFTS: unknown[] = [
   entry({
     slug: "interactive-globe", title: "Interactive Earth globe", category: "3D and Interactive",
-    summary: "A drag-to-spin Earth rendered from a NASA satellite map, with sun lighting, an ocean highlight, moving clouds and an atmosphere glow, plus city markers and arcs. Texture is public domain.",
-    tags: ["globe", "earth", "3d", "map", "canvas", "interactive"], synonyms: ["planet", "world map", "spinning globe", "destinations"],
+    summary: "A drag-to-spin Earth rendered from a NASA satellite map, with sun lighting, an ocean highlight, moving clouds and an atmosphere glow. The map is public domain.",
+    tags: ["globe", "earth", "3d", "map", "canvas", "interactive"], synonyms: ["planet", "world map", "spinning globe"],
     source: "shreekumar-b", author: "shreekumar", style: "animated",
     popularity: 450, created: "2026-11-12", updated: "2026-11-12",
   }),
