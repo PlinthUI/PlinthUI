@@ -116,8 +116,19 @@ export default function InteractiveGlobe() {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)")
     const clouds = buildClouds()
     let tex: Uint8ClampedArray | null = null
+    const poleTop = [0, 0, 0], poleBottom = [0, 0, 0]
     let cancelled = false
-    loadTexture().then((t) => { if (!cancelled) tex = t }).catch(() => {})
+    loadTexture().then((t) => {
+      if (cancelled) return
+      const avg = (from: number, to: number, out: number[]) => {
+        let n = 0
+        out[0] = out[1] = out[2] = 0
+        for (let y = from; y < to; y++) for (let x = 0; x < TW; x++) { const o = (y * TW + x) * 4; out[0] += t[o]; out[1] += t[o + 1]; out[2] += t[o + 2]; n++ }
+        out[0] /= n; out[1] /= n; out[2] /= n
+      }
+      avg(40, 80, poleTop); avg(TH - 80, TH - 40, poleBottom)
+      tex = t
+    }).catch(() => {})
     const rgb = [0, 0, 0]
     const sphere = document.createElement("canvas")
     const sg = sphere.getContext("2d")!
@@ -173,6 +184,11 @@ export default function InteractiveGlobe() {
           const u = (Math.atan2(x, z) + Math.PI) / (2 * Math.PI), vv = 0.5 - Math.asin(y) / Math.PI
           sampleRGB(tex, u, vv, rgb)
           let r = rgb[0], g = rgb[1], b = rgb[2]
+          const polar = (Math.abs(Math.asin(y)) / rad - 79) / 11
+          if (polar > 0) {
+            const t = Math.min(1, polar), pc = y > 0 ? poleTop : poleBottom
+            r += (pc[0] - r) * t; g += (pc[1] - g) * t; b += (pc[2] - b) * t
+          }
           const ocean = b > r * 1.5 && b > g * 1.15 && r + g + b < 230
 
           let diff = nx * L[0] + ny * L[1] + nz * L[2]
@@ -199,21 +215,28 @@ export default function InteractiveGlobe() {
       ctx.drawImage(sphere, cx - R, cy - R, R * 2, R * 2)
 
       const from = toVec(CITIES[sel.current].lat, CITIES[sel.current].lon)
-      ctx.lineWidth = 1.6; ctx.strokeStyle = "rgba(255,226,140,0.95)"
-      CITIES.forEach((c, i) => {
-        if (i === sel.current || (i + sel.current) % 3 !== 0) return
-        const to = toVec(c.lat, c.lon)
-        ctx.beginPath()
-        let pen = false
-        for (let s = 0; s <= 48; s++) {
-          const [ax, ay, az] = rot(slerp(from, to, s / 48, 0.22), v.yaw, v.pitch)
-          if (az <= 0.02) { pen = false; continue }
-          const ppx = cx + ax * R, ppy = cy - ay * R
-          if (pen) ctx.lineTo(ppx, ppy); else ctx.moveTo(ppx, ppy)
-          pen = true
+      // Arcs go to the three nearest cities, hug the surface, and fade out toward the horizon.
+      const nearest = CITIES.map((c, i) => ({ i, d: (() => { const t = toVec(c.lat, c.lon); return from[0] * t[0] + from[1] * t[1] + from[2] * t[2] })() }))
+        .filter((c) => c.i !== sel.current).sort((p, q) => q.d - p.d).slice(0, 3)
+      ctx.save()
+      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.clip()
+      ctx.lineWidth = 1.3; ctx.lineCap = "round"
+      for (const { i } of nearest) {
+        const to = toVec(CITIES[i].lat, CITIES[i].lon)
+        let prev: readonly [number, number, number] | null = null
+        for (let k = 0; k <= 64; k++) {
+          const [ax, ay, az] = rot(slerp(from, to, k / 64, 0.07), v.yaw, v.pitch)
+          if (prev && az > 0 && prev[2] > 0) {
+            const depth = Math.min(1, Math.min(az, prev[2]) * 3)
+            const ends = Math.min(1, Math.min(k, 64 - k) / 6)
+            ctx.strokeStyle = `rgba(255,226,140,${0.85 * depth * ends})`
+            ctx.beginPath(); ctx.moveTo(cx + prev[0] * R, cy - prev[1] * R); ctx.lineTo(cx + ax * R, cy - ay * R); ctx.stroke()
+          }
+          prev = [ax, ay, az]
         }
-        ctx.stroke()
-      })
+      }
+      ctx.restore()
+
       CITIES.forEach((c, i) => {
         const [ax, ay, az] = rot(toVec(c.lat, c.lon), v.yaw, v.pitch)
         if (az <= 0.04) return
