@@ -7,6 +7,48 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
+    slug: "horizontal-gallery", title: "Scroll-linked horizontal gallery", category: "Landing Page Sections", kind: "component",
+    summary: "Snap-scrolling image row where each photo drifts inside its frame and a progress bar tracks position.",
+    tags: ["gallery","horizontal scroll","carousel","parallax"], synonyms: ["image slider","scroll gallery"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["motion"],
+    popularity: 390, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "mask-reveal-image", title: "Curtain reveal image", category: "Effects and Animations", kind: "component",
+    summary: "A panel slides away to reveal the image while it settles from a slight zoom. Plays once in view, with replay.",
+    tags: ["image","reveal","mask","scroll"], synonyms: ["curtain reveal","wipe reveal"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["lucide-react"],
+    popularity: 390, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "scroll-type-line", title: "Scroll-driven type lines", category: "Effects and Animations", kind: "component",
+    summary: "Oversized words slide sideways in opposite directions as the section crosses the screen. Static for reduced motion.",
+    tags: ["text","scroll","typography","kinetic"], synonyms: ["moving text","scroll marquee"],
+    source: "shreekumar-b", author: "shreekumar", style: "bold", deps: ["motion"],
+    popularity: 390, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "cursor-reactive-hero", title: "Cursor reactive hero", category: "3D and Interactive", kind: "section",
+    summary: "Photo background and headline drift in opposite directions with the pointer, on springs, for a sense of depth.",
+    tags: ["hero","cursor","parallax","depth"], synonyms: ["mouse parallax","interactive hero"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["motion"],
+    popularity: 390, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "stacked-cards-scroll", title: "Stacked scroll cards", category: "Effects and Animations", kind: "component",
+    summary: "Cards stick one over another inside a scroll panel while earlier cards scale back. Keyboard scrollable.",
+    tags: ["cards","sticky","scroll","stack"], synonyms: ["sticky stack","process steps"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["motion"],
+    popularity: 390, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "parallax-divider", title: "Parallax section divider", category: "Effects and Animations", kind: "section",
+    summary: "A full-width band between text blocks with a far and a near image moving at different speeds.",
+    tags: ["parallax","divider","scroll","photo"], synonyms: ["section break","layered scroll"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated", deps: ["motion"],
+    popularity: 390, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
     slug: "landing-devtool", title: "Developer tool landing page", kind: "section", category: "Landing Pages",
     summary: "Navbar, centered hero, tabbed features, billing toggle pricing and FAQ in one page.",
     tags: ["landing page","saas","developer tool","pricing","faq"], synonyms: ["template","homepage","marketing site"],
