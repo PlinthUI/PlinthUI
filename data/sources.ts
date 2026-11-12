@@ -1,6 +1,7 @@
 import type { Source } from "@/lib/schema"
 
 export const SOURCES: Source[] = [
+  { id: "shreekumar-b", name: "Shreekumar B", url: "https://shreekumarb.vercel.app", license: "MIT", premium: false, note: "Author's own portfolio, rebuilt as React components." },
   { id: "shadcn-ui", name: "shadcn/ui", url: "https://ui.shadcn.com", license: "MIT", premium: false, note: "Open source. Code is shown and can be copied." },
   { id: "magic-ui", name: "Magic UI", url: "https://magicui.design", license: "MIT", premium: false, note: "Open source. Code is shown and can be copied." },
   { id: "aceternity-ui", name: "Aceternity UI", url: "https://ui.aceternity.com", license: "MIT", premium: false, note: "Open source tier only. Verify each item's license at the source." },

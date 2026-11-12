@@ -234,3 +234,11 @@
     scroll-behavior: auto !important;
   }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
