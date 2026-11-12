@@ -12,7 +12,6 @@ import { formatDate } from "@/lib/time"
 import { SOURCE_BY_ID } from "@/data/sources"
 import { copyText } from "./copy-button"
 import { EntryPicker } from "./entry-picker"
-import { Plaque } from "./plaque"
 import { PlinthStage, STAGE_WIDTHS, type StageWidth } from "./plinth-stage"
 import { WidthSwitch } from "./width-switch"
 
@@ -116,7 +115,7 @@ export function CompareView({ items }: { items: CompareItem[] }) {
                 <X aria-hidden />
               </Button>
             </div>
-            <PlinthStage className="flex-1" previewId={i.entry.previewId} width={width} plaque={<Plaque entry={i.entry} />} />
+            <PlinthStage className="flex-1" previewId={i.entry.previewId} width={width} />
           </li>
         ))}
         {items.length < MAX_COMPARE && (

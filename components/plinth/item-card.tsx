@@ -1,10 +1,8 @@
 import Link from "next/link"
-import { Lock } from "lucide-react"
 import { SOURCE_BY_ID } from "@/data/sources"
 import type { EntryCard } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 import { CompareButton } from "./compare-button"
-import { Plaque } from "./plaque"
 import { PlinthStage } from "./plinth-stage"
 import { SaveButton } from "./save-button"
 
@@ -16,7 +14,7 @@ export function ItemCard({ entry, layout = "grid", index = 0 }: { entry: EntryCa
       style={{ "--i": Math.min(index, 12) } as React.CSSProperties}
     >
       <div className={cn("transition-transform duration-200 group-hover:-translate-y-0.5 motion-reduce:transition-none", layout === "list" && "sm:w-72 sm:shrink-0")}>
-        <PlinthStage mode="card" previewId={entry.previewId} kind={entry.kind} plaque={<Plaque entry={entry} />} />
+        <PlinthStage mode="card" previewId={entry.previewId} kind={entry.kind} />
       </div>
       <div className="min-w-0 flex-1 px-1">
         <div className="flex items-start justify-between gap-2">
@@ -36,15 +34,6 @@ export function ItemCard({ entry, layout = "grid", index = 0 }: { entry: EntryCa
           </div>
         </div>
         <p className={cn("mt-2 text-sm text-muted-foreground", layout === "grid" ? "line-clamp-2" : "line-clamp-3")}>{entry.summary}</p>
-        <ul className="mt-3 flex flex-wrap gap-1.5 text-xs">
-          {entry.isNew && <li className="rounded-md bg-primary/10 px-2 py-1 font-medium text-primary">New</li>}
-          <li className="inline-flex items-center gap-1 rounded-md border px-2 py-1">
-            {!entry.redistributable && <Lock className="size-3" aria-hidden />}
-            {entry.redistributable ? "Open source" : "Premium"}
-          </li>
-          <li className="rounded-md border px-2 py-1">{entry.kind === "section" ? "Section" : "Component"}</li>
-          <li className="rounded-md border px-2 py-1">{entry.style}</li>
-        </ul>
       </div>
     </article>
   )

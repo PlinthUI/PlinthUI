@@ -2,7 +2,6 @@ import Link from "next/link"
 import { ArrowRight, Lock } from "lucide-react"
 import { HeroSearch } from "@/components/plinth/hero-search"
 import { ItemCard } from "@/components/plinth/item-card"
-import { Plaque } from "@/components/plinth/plaque"
 import { PlinthStage } from "@/components/plinth/plinth-stage"
 import { buttonVariants } from "@/components/ui/button"
 import { CATEGORIES } from "@/lib/categories"
@@ -36,7 +35,7 @@ export default async function Home() {
         </div>
         <div className="min-w-0">
           {hero ? (
-            <PlinthStage previewId={hero.previewId} plaque={<Plaque entry={hero} />} />
+            <PlinthStage previewId={hero.previewId} />
           ) : (
             <div className="grid min-h-[22rem] place-items-center rounded-xl border border-dashed text-center">
               <p className="max-w-xs px-6 text-muted-foreground">The first components will stand here, live, on their plinth.</p>

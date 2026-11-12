@@ -9,7 +9,6 @@ import { formatDate } from "@/lib/time"
 import { SOURCE_BY_ID } from "@/data/sources"
 import { CodeBlock } from "./code-block"
 import { InstallPanel } from "./install-panel"
-import { Plaque } from "./plaque"
 import { PlinthStage, STAGE_WIDTHS, type StageWidth } from "./plinth-stage"
 import { WidthSwitch } from "./width-switch"
 
@@ -122,7 +121,7 @@ export function Workbench({ entry, codeFiles }: { entry: ComponentEntry; codeFil
                 <WidthSwitch value={width} onChange={setWidth} />
               </div>
             </div>
-            <PlinthStage previewId={entry.previewId} variant={variant} width={width} plaque={<Plaque entry={{ sourceId: entry.provenance.sourceId, license: entry.provenance.license, frameworks: entry.frameworks, redistributable: entry.provenance.redistributable }} />} />
+            <PlinthStage previewId={entry.previewId} variant={variant} width={width} />
           </>
         )}
       </div>
