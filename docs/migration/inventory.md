@@ -67,9 +67,9 @@ Each blocked item can be finished by supplying its asset files under `public/blo
 
 Supplied source: `/home/Shreekumar/Downloads/animata-main`. 213 component files were copied into `animata/` (kept in its own folder structure so internal `@/animata/...` imports keep working). Each component's default export is its own preview. Left out entirely: `hero-section`, `video-chat`, `clock-with-photo`, `music-widget`, `profile`, `orbiting-items`, `orbiting-items-3-d` (they depend on Animata media, logos or removed brand icons). The remaining sub-files of compound components (for example `preloader/split-reveal/*`) are support code, not separate entries.
 
-Catalogued entries: **159** (prefixed `an-`). Rendered with content in the browser and without error boundaries: all 159.
+Catalogued entries: **150** (prefixed `an-`). Every entry renders inside a stage: backgrounds and layout components get a fixed-height box so they have something to fill. Measured in the browser for visible content (text, media or painted boxes) and for crashes: all 150 pass.
 
-Code present in `animata/` but **not** in the catalogue (33):
+Code present in `animata/` but **not** in the catalogue (42):
 
 | Component | Reason |
 |---|---|
@@ -107,4 +107,13 @@ Code present in `animata/` but **not** in the catalogue (33):
 | animata/image/zoom-image | Image component with no source supplied by default |
 | animata/widget/flight-widget | Hotlinks a third-party brand logo that does not load |
 
+| animata/text/animated-gradient-text | Renders nothing without text passed in as children |
+| animata/text/double-underline | Renders nothing without text passed in as children |
+| animata/text/glitch-text | Renders nothing without text passed in as children |
+| animata/text/jitter-text | Renders nothing without text passed in as children |
+| animata/text/metis-text | Renders nothing without text passed in as children |
+| animata/text/roll-text | Renders nothing without text passed in as children |
+| animata/text/underline-hover-text | Renders nothing without text passed in as children |
+| animata/text/wave-reveal | Renders nothing without text passed in as children |
+| animata/section/pricing | Crashes without its example props |
 To finish any of these, wrap it in a preview that passes the example props from its `*.stories.tsx` in the upstream repository, then add its entry back.
