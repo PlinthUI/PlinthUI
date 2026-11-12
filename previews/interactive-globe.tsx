@@ -274,8 +274,8 @@ export default function InteractiveGlobe() {
         onPointerMove={(e) => {
           const v = view.current
           if (!v.drag) return
-          v.yaw += (e.clientX - v.drag.x) * 0.008
-          v.pitch = Math.max(-1.2, Math.min(1.2, v.pitch + (e.clientY - v.drag.y) * 0.008))
+          v.yaw -= (e.clientX - v.drag.x) * 0.008
+          v.pitch = Math.max(-1.2, Math.min(1.2, v.pitch - (e.clientY - v.drag.y) * 0.008))
           v.drag = { x: e.clientX, y: e.clientY }
         }}
         onPointerUp={() => (view.current.drag = null)}
