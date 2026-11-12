@@ -24,6 +24,7 @@ const eslintConfig = [
       "components/interactive/**",
       "components/forms/**",
       "components/lists/**",
+      "components/blocks/**",
     ],
   },
 ];
