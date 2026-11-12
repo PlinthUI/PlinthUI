@@ -13,6 +13,9 @@ export const CATEGORIES = [
   { id: "Effects and Animations", blurb: "Pointer, motion, reveal" },
   { id: "Full Sections", blurb: "Navbars and footers" },
   { id: "Audio and Media", blurb: "Voice, recorders, players" },
+  { id: "Cards and Widgets", blurb: "Self-contained interactive cards" },
+  { id: "Inputs and Controls", blurb: "Switches, dials, inputs" },
+  { id: "Lists and Pickers", blurb: "Selection, chat, tabs" },
   { id: "UX Patterns", blurb: "Empty, loading, onboarding" },
   { id: "3D and Interactive", blurb: "Drag, depth, pointer play" },
 ] as const

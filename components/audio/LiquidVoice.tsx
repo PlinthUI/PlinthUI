@@ -1,9 +1,9 @@
 "use client";
 
 /*
- * Liquid Voice. Source: Pin UI by Rachit Thakur, https://www.pinui.xyz/components/liquid-voice
- * Licence: MIT, as stated in the Pin UI terms (https://www.pinui.xyz/terms) and README.
- * Included unmodified apart from this notice. See THIRD_PARTY_NOTICES.md.
+ * Source: Pin UI by Rachit Thakur, https://www.pinui.xyz/components/liquid-voice
+ * Licence: MIT (Pin UI terms and README). Included unmodified apart from this notice.
+ * See THIRD_PARTY_NOTICES.md.
  */
 
 import { useEffect, useRef, useState } from "react";

@@ -1,28 +1,12 @@
 import { ComponentEntrySchema, type ComponentEntry } from "@/lib/schema"
 import { entry } from "./define"
+import { PIN_ENTRIES } from "./pin-ui"
 
 /**
  * Add entries here, built with entry() from ./define. Parsed once so a
  * malformed entry fails the build instead of a page.
  */
 const DRAFTS: unknown[] = [
-  entry({
-    slug: "liquid-voice", title: "Liquid Voice", category: "Audio and Media",
-    summary: "A voice-input pill of real liquid glass that stretches into a recorder, with a generated waveform, cancel and send. The glass is drawn in WebGL 2 with a CSS fallback. No microphone is used.",
-    tags: ["voice", "audio", "recorder", "glass", "waveform", "webgl"], synonyms: ["voice input", "record button", "liquid glass", "dictation"],
-    source: "pin-ui", author: "Rachit Thakur", style: "glass", deps: ["motion"],
-    sourceUrl: "https://www.pinui.xyz/components/liquid-voice",
-    attribution: "By Rachit Thakur, from Pin UI. MIT licensed. Included unmodified with its licence notice. See THIRD_PARTY_NOTICES.md.",
-    files: [{ path: "components/audio/LiquidVoice.tsx", language: "tsx" }, { path: "components/audio/liquid-voice.css", language: "css" }],
-    variants: [{ id: "light", title: "Light" }, { id: "dark", title: "Dark" }],
-    props: [
-      { name: "theme", type: '"light" | "dark"', default: '"light"', description: "Picks the light or dark sky and controls." },
-      { name: "fill", type: "boolean", default: "false", description: "Fill the container edge to edge instead of a 16:10 box." },
-      { name: "onSend", type: "(durationMs: number) => void", description: "Called when a take is sent, with the recorded length." },
-      { name: "onCancel", type: "() => void", description: "Called when a take is cancelled or stopped." },
-    ],
-    popularity: 600, created: "2026-11-12", updated: "2026-11-12",
-  }),
   entry({
     slug: "glass-profile-card", title: "Glass profile card", category: "Basic Components",
     summary: "A frosted profile card over a photo with stats, follow toggle and like button.",
@@ -122,7 +106,7 @@ const DRAFTS: unknown[] = [
     popularity: 340, created: "2026-11-12", updated: "2026-11-12",
   }),
   entry({
-    slug: "chat-room", title: "Chat room", category: "Dashboard UI",
+    slug: "chat-room", title: "Simple chat room", category: "Dashboard UI",
     summary: "Message thread with a typing indicator, auto-scroll and a canned reply. Nothing is sent anywhere.",
     tags: ["chat","messages","conversation","thread"], synonyms: ["messenger","inbox thread"],
     source: "shreekumar-b", author: "shreekumar", style: "minimal", deps: ["lucide-react"],
@@ -136,7 +120,7 @@ const DRAFTS: unknown[] = [
     popularity: 340, created: "2026-11-12", updated: "2026-11-12",
   }),
   entry({
-    slug: "balance-card", title: "Balance card", category: "Dashboard UI",
+    slug: "balance-card", title: "Simple balance card", category: "Dashboard UI",
     summary: "Balance with a hide toggle, a small trend line and send and receive buttons. Figures are sample values.",
     tags: ["balance","finance","wallet","card"], synonyms: ["account card","money card"],
     source: "shreekumar-b", author: "shreekumar", style: "bold", deps: ["lucide-react"],
@@ -409,7 +393,7 @@ const DRAFTS: unknown[] = [
     popularity: 380, created: "2026-11-12", updated: "2026-11-12",
   }),
   entry({
-    slug: "theme-switch", title: "Theme switch", category: "Basic Components",
+    slug: "theme-switch", title: "Simple theme switch", category: "Basic Components",
     summary: "Pill switch with a sliding knob and sun or moon icon, exposed as a switch role.",
     tags: ["switch","toggle","theme","dark mode"], synonyms: ["light dark toggle","mode switch"],
     source: "shreekumar-b", author: "shreekumar", style: "playful", deps: ["lucide-react"],
@@ -522,4 +506,4 @@ const DRAFTS: unknown[] = [
   }),
 ]
 
-export const ENTRIES: ComponentEntry[] = DRAFTS.map((e) => ComponentEntrySchema.parse(e))
+export const ENTRIES: ComponentEntry[] = [...PIN_ENTRIES, ...DRAFTS].map((e) => ComponentEntrySchema.parse(e))
