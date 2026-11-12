@@ -21,7 +21,7 @@ type Selected = Record<FacetKey, string[]>
 
 const SORTS = [
   { id: "relevance", label: "Relevance" },
-  { id: "popular", label: "Most popular (mock)" },
+  { id: "popular", label: "Most popular" },
   { id: "newest", label: "Recently updated" },
   { id: "title", label: "Title A to Z" },
 ]
@@ -203,7 +203,12 @@ export function Explorer({ entries }: { entries: EntryCard[] }) {
           )}
         </div>
 
-        {results.length === 0 ? (
+        {entries.length === 0 ? (
+          <div className="mt-10 grid place-items-center rounded-xl border border-dashed px-6 py-16 text-center">
+            <h2 className="text-lg font-semibold">No components yet</h2>
+            <p className="mt-1 max-w-sm text-sm text-muted-foreground">The catalogue is empty. Components will appear here as they are added.</p>
+          </div>
+        ) : results.length === 0 ? (
           <div className="mt-10 grid place-items-center rounded-xl border border-dashed px-6 py-16 text-center">
             <SearchX className="size-8 text-muted-foreground" aria-hidden />
             <h2 className="mt-3 text-lg font-semibold">Nothing matches that</h2>

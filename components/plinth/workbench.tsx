@@ -225,7 +225,7 @@ export function Workbench({ entry, codeHtml, codeText }: { entry: ComponentEntry
             </p>
             <p className="mt-2 text-muted-foreground">{LICENSE_SUMMARY[entry.provenance.license]}</p>
             {entry.provenance.attribution && <p className="mt-3 border-t pt-3">{entry.provenance.attribution}</p>}
-            <p className="mt-3 text-xs text-muted-foreground">This is a plain language summary, not legal advice. Demo data: confirm the real license with the project.</p>
+            <p className="mt-3 text-xs text-muted-foreground">This is a plain language summary, not legal advice. Confirm the license with the project before use.</p>
           </div>
         </div>
       </div>

@@ -18,14 +18,10 @@ import { WidthSwitch } from "./width-switch"
 
 export type CompareItem = { entry: EntryCard; sizeClass: string }
 
-const PRESETS = [
-  { label: "Three pricing tables", items: ["pricing-cards-toggle", "pricing-usage-slider", "pricing-comparison-table"] },
-  { label: "Three sign in flows", items: ["login-form", "magic-link-flow", "two-factor-card"] },
-  { label: "Three ways to layer UI", items: ["modal-dialog", "drawer-sheet", "context-menu"] },
-  { label: "Tabs, segments, accordion", items: ["tabs-underline", "segmented-control", "accordion"] },
-]
+const PRESETS: { label: string; items: string[] }[] = []
 
 export function ComparePresets() {
+  if (PRESETS.length === 0) return null
   return (
     <ul className="mt-4 grid gap-2 sm:grid-cols-2">
       {PRESETS.map((p) => (

@@ -1,4 +1,4 @@
-/** Fixed reference date so "New" is deterministic for the mock dataset. */
+/** Fixed reference date so "New" is deterministic. */
 export const MOCK_TODAY = "2026-11-12"
 export const NEW_WINDOW_DAYS = 45
 

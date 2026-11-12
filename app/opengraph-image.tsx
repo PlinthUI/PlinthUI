@@ -16,7 +16,7 @@ export default function OgImage() {
           <div style={{ fontSize: 40, fontWeight: 600 }}>PlinthUI</div>
         </div>
         <div style={{ fontSize: 76, fontWeight: 600, lineHeight: 1.08, maxWidth: 940 }}>Compare UI components before you commit</div>
-        <div style={{ fontSize: 30, color: "#9099a8" }}>Source and license on every entry. Demo data.</div>
+        <div style={{ fontSize: 30, color: "#9099a8" }}>Source and license on every entry.</div>
       </div>
     ),
     size

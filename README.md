@@ -4,13 +4,11 @@ One place to discover, preview, compare and save UI components from many librari
 
 The name comes from the base a sculpture stands on so it can be seen properly. Every component here is shown on a **plinth** (a lit preview stage) with a **plaque** underneath carrying its source, license and framework.
 
-> **Demo data.** Phase 1 ships realistic mock entries. Every preview and every line of code was written for this project. Source names such as shadcn/ui or Tailwind Plus are labels in the dataset, not endorsements, and entries are illustrative. Verify licenses with each project before using anything.
-
 ## Phase roadmap
 
 | Phase | Scope | Status |
 |---|---|---|
-| 1 | Complete frontend with mock data, no backend | This repository |
+| 1 | Complete frontend, no backend | This repository |
 | 2 | Zod schemas in a database (Supabase), sandboxed iframe previews | Planned |
 | 3 | Ingestion with Firecrawl and Claude | Planned |
 | 4 | Playground and framework specific code | Planned |
@@ -33,7 +31,6 @@ npm install
 npm run dev        # http://localhost:3000
 npm run typecheck  # tsc --noEmit
 npm run lint
-npm run test:search  # search acceptance test
 npm run build && npm start
 ```
 
@@ -42,7 +39,7 @@ Requires Node 20 or newer. Next.js 15, Tailwind CSS v4, TypeScript strict.
 ## How the data layer works
 
 ```
-data/entries/*.ts     compact entry definitions (mock)
+data/entries/*.ts     entry definitions (empty, added one by one)
 data/sources.ts       source directory
 lib/schema.ts         Zod schemas and types (ComponentEntry, Provenance)
 lib/repository.ts     the only data interface: list, get, search, related, sources
@@ -53,10 +50,12 @@ components/plinth/    PlinthStage, Plaque, ItemCard, FilterRail, CommandPalette 
 design-system/MASTER.md  tokens, type, shape, motion, plinth anatomy
 ```
 
-Pages never import mock data or previews directly. They call `repository` and render previews only through `<PlinthStage previewId>`. In Phase 2 the repository body moves to Supabase and the registry lookup in `PlinthStage` becomes a sandboxed iframe, with no page changes.
+Pages never import entry data or previews directly. They call `repository` and render previews only through `<PlinthStage previewId>`. In Phase 2 the repository body moves to Supabase and the registry lookup in `PlinthStage` becomes a sandboxed iframe, with no page changes.
 
 For redistributable entries the repository reads `previews/<id>.tsx` from disk and serves it as the entry's code, so the code you see is the code that runs. Entries with `redistributable: false` never receive code. The Code tab shows a locked state and links to the source.
 
-## Licensing and attribution
+## Adding a component
 
-PlinthUI is licensed under the terms in `LICENSE`. Component entries shown in the product carry their own license field. Premium entries are never redistributed.
+1. Write the preview as `previews/<slug>.tsx` (default export, `"use client"`).
+2. Register it in `previews/registry.tsx`.
+3. Add an entry with `entry({...})` from `data/entries/define.ts` to `DRAFTS` in `data/entries/index.ts`.

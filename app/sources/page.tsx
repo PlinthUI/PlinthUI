@@ -17,7 +17,7 @@ export default async function SourcesPage() {
   return (
     <div className="mx-auto max-w-[1400px] px-4 py-10 sm:px-6">
       <h1 className="text-3xl font-semibold tracking-tight">Sources</h1>
-      <p className="mt-1 max-w-prose text-muted-foreground">Every entry credits where it came from. Source names here are labels in demo data, not endorsements.</p>
+      <p className="mt-1 max-w-prose text-muted-foreground">Every entry credits where it came from.</p>
 
       <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_22rem]">
         <div className="overflow-x-auto rounded-xl border bg-card">
@@ -67,10 +67,6 @@ export default async function SourcesPage() {
             <div>
               <dt className="font-medium">Premium (proprietary)</dt>
               <dd className="mt-1 text-muted-foreground">You see the preview, metadata and license summary. Code is never shown and every action links to the original.</dd>
-            </div>
-            <div>
-              <dt className="font-medium">Demo data</dt>
-              <dd className="mt-1 text-muted-foreground">All previews and code here were written for this project. Verify real licenses with each project before using anything.</dd>
             </div>
           </dl>
           <Link href="/explore?license=premium" className={cn(buttonVariants({ variant: "outline" }), "mt-5")}>

@@ -68,7 +68,7 @@ export function InstallPanel({ cli, manual, path, sourceName }: { cli?: string; 
       <div role="note" className="flex gap-3 rounded-lg border border-warning/40 bg-warning/10 p-3 text-sm">
         <TriangleAlert className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden />
         <p>
-          Always review third party code before installing it. This entry comes from {sourceName}. PlinthUI does not audit it, and the demo data here is illustrative.
+          Always review third party code before installing it. This entry comes from {sourceName}. PlinthUI does not audit it.
         </p>
       </div>
     </div>

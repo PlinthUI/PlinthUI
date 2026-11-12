@@ -10,14 +10,14 @@ import { repository } from "@/lib/repository"
 import { formatDate } from "@/lib/time"
 import { cn } from "@/lib/utils"
 
-const COMPARE_SET = ["pricing-cards-toggle", "pricing-usage-slider", "pricing-comparison-table"]
+const COMPARE_SET: string[] = []
 
 export default async function Home() {
   const [all, sources] = await Promise.all([repository.list(), repository.sources()])
   const top = [...all].sort((a, b) => b.popularity - a.popularity).slice(0, 6)
   const fresh = all.filter((e) => e.isNew).sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)).slice(0, 7)
-  const hero = all.find((e) => e.slug === "pricing-cards-toggle")!
-  const compare = COMPARE_SET.map((s) => all.find((e) => e.slug === s)!)
+  const hero = top[0]
+  const compare = COMPARE_SET.map((s) => all.find((e) => e.slug === s)).filter((e): e is NonNullable<typeof e> => !!e)
   const count = (cat: string) => all.filter((e) => e.category === cat).length
   const sourceCount = (id: string) => all.filter((e) => e.sourceId === id).length
   const open = all.filter((e) => e.redistributable).length
@@ -35,16 +35,22 @@ export default async function Home() {
           </Link>
         </div>
         <div className="min-w-0">
-          <PlinthStage previewId={hero.previewId} plaque={<Plaque entry={hero} />} />
+          {hero ? (
+            <PlinthStage previewId={hero.previewId} plaque={<Plaque entry={hero} />} />
+          ) : (
+            <div className="grid min-h-[22rem] place-items-center rounded-xl border border-dashed text-center">
+              <p className="max-w-xs px-6 text-muted-foreground">The first components will stand here, live, on their plinth.</p>
+            </div>
+          )}
         </div>
       </section>
 
       {/* 2. Ranked list */}
-      <section aria-labelledby="top-heading" className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6">
+      {top.length > 0 && <section aria-labelledby="top-heading" className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
             <h2 id="top-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl">Top this week</h2>
-            <p className="mt-1 text-muted-foreground">Ranked by a mock popularity score.</p>
+            <p className="mt-1 text-muted-foreground">Ranked by popularity score.</p>
           </div>
           <Link href="/explore?sort=popular" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-primary hover:underline">
             See the full ranking <ArrowRight className="size-4" aria-hidden />
@@ -64,15 +70,15 @@ export default async function Home() {
                 <p className="mt-0.5 truncate text-sm text-muted-foreground">
                   {e.category} on {sources.find((s) => s.id === e.sourceId)?.name}
                 </p>
-                <p className="mt-1 text-xs text-muted-foreground tnum">Score {e.popularity} (mock)</p>
+                <p className="mt-1 text-xs text-muted-foreground tnum">Score {e.popularity}</p>
               </div>
             </li>
           ))}
         </ol>
-      </section>
+      </section>}
 
       {/* 3. Scroll-snap rail */}
-      <section aria-labelledby="new-heading" className="border-y bg-secondary/40 py-16">
+      {fresh.length > 0 && <section aria-labelledby="new-heading" className="border-y bg-secondary/40 py-16">
         <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
           <h2 id="new-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl">New and noteworthy</h2>
           <p className="mt-1 text-muted-foreground">Updated in the last 45 days.</p>
@@ -84,7 +90,7 @@ export default async function Home() {
             </li>
           ))}
         </ul>
-      </section>
+      </section>}
 
       {/* 4. Category index */}
       <section aria-labelledby="cat-heading" className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6">
@@ -105,7 +111,7 @@ export default async function Home() {
       </section>
 
       {/* 5. Compare teaser: table beside text */}
-      <section aria-labelledby="cmp-heading" className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[2fr_3fr]">
+      {compare.length === 3 && <section aria-labelledby="cmp-heading" className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[2fr_3fr]">
         <div className="grid content-start gap-4">
           <h2 id="cmp-heading" className="text-2xl font-semibold tracking-tight sm:text-3xl">Three pricing tables, one width</h2>
           <p className="max-w-md text-muted-foreground">Put up to three implementations on their own plinths, switch every preview to phone width at once, and read the differences underneath.</p>
@@ -143,7 +149,7 @@ export default async function Home() {
             </tbody>
           </table>
         </div>
-      </section>
+      </section>}
 
       {/* 6. Open source versus premium, with sources */}
       <section aria-labelledby="policy-heading" className="mx-auto max-w-[1400px] px-4 pb-8 pt-4 sm:px-6">

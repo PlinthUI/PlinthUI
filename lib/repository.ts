@@ -19,7 +19,7 @@ export interface Repository {
   sources(): Promise<Source[]>
 }
 
-/** Mock only: the demo reads the preview source from disk as its "code". */
+/** Reads the preview source from disk and serves it as the entry's code. */
 function loadCode(e: ComponentEntry): ComponentEntry {
   if (!e.provenance.redistributable) {
     return { ...e, files: e.files.map(({ path: p, language }) => ({ path: p, language })) }

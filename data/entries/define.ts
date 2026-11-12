@@ -23,7 +23,7 @@ type Def = {
 
 const BASE_DEPS = ["react"]
 
-/** Builds a full entry from a compact definition. Demo data only. */
+/** Builds a full entry from a compact definition. */
 export function entry(d: Def): ComponentEntry {
   const source = SOURCE_BY_ID[d.source]
   if (!source) throw new Error(`Unknown source ${d.source} for ${d.slug}`)
@@ -62,7 +62,7 @@ export function entry(d: Def): ComponentEntry {
       license: source.license,
       redistributable,
       attribution: redistributable
-        ? "Illustrative entry written for this demo. Confirm the real license with the project before use."
+        ? "Confirm the license with the project before use."
         : "Premium source. Preview and metadata only. Code is available from the source under its own terms.",
     },
   }
