@@ -7,6 +7,62 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
+    slug: "glass-profile-card", title: "Glass profile card", category: "Basic Components",
+    summary: "A frosted profile card over a photo with stats, follow toggle and like button.",
+    tags: ["glass","glassmorphism","profile","card","frosted"], synonyms: ["frosted card","blur card"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "glass-navbar", title: "Glass navbar", category: "Navigation",
+    summary: "A floating translucent nav bar that blurs the photo behind it, with a current page pill.",
+    tags: ["glass","glassmorphism","navbar","navigation","frosted"], synonyms: ["frosted nav","blur header"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "glass-modal", title: "Glass modal", category: "Overlays",
+    summary: "A native dialog with a frosted panel and a blurred backdrop, with focus handling built in.",
+    tags: ["glass","glassmorphism","modal","dialog","frosted"], synonyms: ["frosted dialog","blur popup"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "glass-pricing", title: "Glass pricing cards", category: "Marketing UI",
+    summary: "Three frosted plan cards over a photo with a monthly or yearly switch and a highlighted plan.",
+    tags: ["glass","glassmorphism","pricing","plans","frosted"], synonyms: ["frosted pricing","blur plans"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "glass-login", title: "Glass sign in form", category: "Authentication",
+    summary: "A frosted login card with validation on submit and a pending state. Nothing is sent.",
+    tags: ["glass","glassmorphism","login","signin","auth","frosted"], synonyms: ["frosted login","blur form"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "glass-toasts", title: "Glass toast stack", category: "Feedback",
+    summary: "Frosted notifications that slide in, stack to three and dismiss themselves.",
+    tags: ["glass","glassmorphism","toast","notification","frosted"], synonyms: ["frosted alert","blur toast"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "glass-dock", title: "Glass app dock", category: "Navigation",
+    summary: "A frosted dock whose icons grow toward the pointer or keyboard focus and neighbors follow.",
+    tags: ["glass","glassmorphism","dock","apps","frosted"], synonyms: ["app bar","launcher","magnify dock"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "glass-control-panel", title: "Glass control panel", category: "Dashboard UI",
+    summary: "Frosted quick settings with two switches and two sliders over a photo.",
+    tags: ["glass","glassmorphism","controls","settings","frosted"], synonyms: ["quick settings","control center"],
+    source: "shreekumar-b", author: "shreekumar", style: "glass", deps: ["lucide-react"],
+    popularity: 330, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
     slug: "joystick-pad", title: "Joystick pad", category: "3D and Interactive",
     summary: "A round control you drag or steer with arrow keys. It reports x and y from -100 to 100 and recentres on release.",
     tags: ["joystick","control","drag","input"], synonyms: ["analog stick","direction pad"],
