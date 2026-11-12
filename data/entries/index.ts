@@ -11,13 +11,18 @@ import { ANIMATA_ENTRIES } from "./animata"
 const DRAFTS: unknown[] = [
   entry({
     slug: "flow-background", title: "Flow field background", category: "Effects and Animations",
-    summary: "Thin glowing lines flow through a drifting field and curl around the pointer. Uses the current text color, pauses off screen and draws one still frame for reduced motion.",
+    summary: "Thin glowing lines flow through a drifting field. The pointer is a magnet that reveals and curls them, and a press stirs a swirl. Uses the current text color, pauses off screen and draws one still frame for reduced motion.",
     tags: ["background", "flow", "lines", "canvas", "hero", "landing"], synonyms: ["animated background", "flow lines", "particle field", "landing background"],
     source: "shreekumar-b", author: "shreekumar", style: "animated",
     files: [{ path: "components/plinth/flow-background.tsx", language: "tsx" }],
     props: [
       { name: "className", type: "string", description: "Classes for the canvas, for example to position it behind content." },
       { name: "density", type: "number", default: "520", description: "How many lines are drawn. Scales with the canvas size." },
+      { name: "reveal", type: "boolean", default: "false", description: "Lines stay faint until the pointer comes near, then light up." },
+      { name: "magnetStrength", type: "number", default: "1", description: "Strength of the pointer magnet. 0 turns it off." },
+      { name: "magnetRadius", type: "number", default: "0.35", description: "Reach of the magnet as a fraction of the canvas height." },
+      { name: "clickSwirl", type: "boolean", default: "true", description: "A press stirs the lines into a short swirl." },
+      { name: "intro", type: "boolean", default: "true", description: "Fade the lines in on mount." },
     ],
     popularity: 480, created: "2026-11-12", updated: "2026-11-12",
   }),
