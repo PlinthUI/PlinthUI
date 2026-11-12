@@ -68,7 +68,7 @@ export function CollectionsManager() {
             <AlertTriangle className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden /> Browser storage is blocked. Collections last until you close this tab. Export to keep them.
           </p>
         )}
-        <ul className="grid gap-1">
+        <ul className="grid grid-cols-1 gap-1">
           {collections.map((c) => (
             <li key={c.id}>
               <button type="button" aria-current={c.id === active.id ? "true" : undefined} onClick={() => setActiveId(c.id)} className={cn("flex min-h-11 w-full items-center justify-between rounded-lg px-3 text-left text-sm", c.id === active.id ? "bg-secondary font-medium" : "hover:bg-accent")}>
@@ -81,7 +81,7 @@ export function CollectionsManager() {
             </li>
           ))}
         </ul>
-        <form onSubmit={create} className="grid gap-2">
+        <form onSubmit={create} className="grid grid-cols-1 gap-2">
           <label htmlFor="new-collection" className="text-sm font-medium">
             New collection
           </label>
@@ -92,7 +92,7 @@ export function CollectionsManager() {
             </Button>
           </div>
         </form>
-        <div className="grid gap-2 border-t pt-5">
+        <div className="grid grid-cols-1 gap-2 border-t pt-5">
           <p className="text-sm font-medium">Backup</p>
           <Button variant="outline" onClick={exportJson}>
             <Download aria-hidden /> Export JSON
@@ -178,7 +178,7 @@ export function CollectionsManager() {
           <>
             <ul className="mt-6 grid gap-x-5 gap-y-9 sm:grid-cols-2 xl:grid-cols-3">
               {items.map((e, i) => (
-                <li key={e.slug} className="grid gap-2">
+                <li key={e.slug} className="grid grid-cols-1 gap-2">
                   <ItemCard entry={e} index={i} />
                   <Button variant="outline" size="sm" className="justify-self-start" onClick={() => collectionsApi.removeItem(active.id, e.slug)}>
                     <X aria-hidden /> Remove from {active.name}

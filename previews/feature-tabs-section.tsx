@@ -42,7 +42,7 @@ function Share() {
         <li key={k} className="flex min-h-11 items-center justify-between gap-3 text-sm">
           {label}
           <button type="button" role="switch" aria-checked={rules[k]} aria-label={label} onClick={() => setRules({ ...rules, [k]: !rules[k] })} className="relative h-7 w-12 shrink-0 rounded-full bg-secondary transition-colors aria-checked:bg-primary">
-            <span className={cn("absolute left-1 top-1 size-5 rounded-full bg-card shadow transition-transform", rules[k] && "translate-x-5")} />
+            <span className={cn("absolute left-0.5 top-0.5 size-5 rounded-full bg-card shadow transition-transform", rules[k] && "translate-x-5")} />
           </button>
         </li>
       ))}

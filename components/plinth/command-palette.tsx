@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
 import { Bookmark, Compass, Folder, GitCompareArrows, Library, Moon, Search, Sun } from "lucide-react"
-import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
+import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
 import { Button } from "@/components/ui/button"
 import { CATEGORIES } from "@/lib/categories"
 import { searchEntries } from "@/lib/search"
@@ -48,6 +48,7 @@ export function CommandPalette() {
 
   return (
     <CommandDialog open={open} onOpenChange={setOpen} title="Search PlinthUI" description="Search components, jump to a category or change theme.">
+      <Command shouldFilter={false} loop>
       <CommandInput value={query} onValueChange={setQuery} placeholder="Search components, categories, actions…" />
       <CommandList>
         <CommandEmpty>Nothing matches “{query}”. Try “pricing cards” or “login form”.</CommandEmpty>
@@ -96,6 +97,7 @@ export function CommandPalette() {
           </CommandItem>
         </CommandGroup>
       </CommandList>
+      </Command>
     </CommandDialog>
   )
 }

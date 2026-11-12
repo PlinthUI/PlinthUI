@@ -26,7 +26,7 @@ export function EntryPicker({ onPick, exclude = [], label = "Add a component", a
         <Search className="pointer-events-none absolute left-3 top-3.5 size-4 text-muted-foreground" aria-hidden />
         <input id={id} type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Try “pricing” or “login”" className="h-11 w-full rounded-lg border border-input bg-card pl-9 pr-3 text-sm focus-visible:border-primary" />
       </div>
-      <ul className="mt-2 grid gap-1">
+      <ul className="mt-2 grid grid-cols-1 gap-1">
         {results.map((e) => (
           <li key={e.slug} className="flex min-h-12 items-center justify-between gap-3 rounded-lg border bg-card pl-3 pr-1.5">
             <span className="min-w-0 text-sm">

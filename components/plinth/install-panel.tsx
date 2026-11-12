@@ -20,7 +20,7 @@ export function InstallPanel({ cli, manual, path, sourceName }: { cli?: string; 
   const [mode, setMode] = useState<"cli" | "manual">("cli")
 
   return (
-    <div className="grid gap-5">
+    <div className="grid grid-cols-1 gap-5">
       <div className="flex flex-wrap items-center gap-3">
         <div role="radiogroup" aria-label="Install method" className="inline-flex rounded-lg bg-secondary p-1">
           {(["cli", "manual"] as const).map((m) => (
@@ -39,26 +39,26 @@ export function InstallPanel({ cli, manual, path, sourceName }: { cli?: string; 
       </div>
 
       {mode === "cli" ? (
-        <div className="grid gap-2">
+        <div className="grid grid-cols-1 gap-2">
           <p className="text-sm text-muted-foreground">Run this in your project root. It adds the file below and its dependencies.</p>
           {cli ? <Command text={toRunCommand(cli, pm)} /> : null}
           <p className="font-mono text-[13px] text-muted-foreground">Creates {path}</p>
         </div>
       ) : (
-        <ol className="grid gap-4 text-sm">
-          <li className="grid gap-2">
+        <ol className="grid grid-cols-1 gap-4 text-sm">
+          <li className="grid grid-cols-1 gap-2">
             <span className="font-medium">1. Install the dependencies</span>
             {(manual && manual.length ? manual : ["npm install react"]).map((m) => (
               <Command key={m} text={toAddCommand(m, pm)} />
             ))}
           </li>
-          <li className="grid gap-1">
+          <li className="grid grid-cols-1 gap-1">
             <span className="font-medium">2. Copy the code</span>
             <span className="text-muted-foreground">
               Create <code className="font-mono text-[13px] text-foreground">{path}</code> and paste the file from the Code tab.
             </span>
           </li>
-          <li className="grid gap-1">
+          <li className="grid grid-cols-1 gap-1">
             <span className="font-medium">3. Import it</span>
             <span className="text-muted-foreground">Use the default export from your page or component.</span>
           </li>

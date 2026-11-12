@@ -24,9 +24,9 @@ export default function PricingCardsToggle({ variant = "monthly" }: PreviewProps
           aria-checked={annual}
           aria-label="Bill annually"
           onClick={() => setAnnual(!annual)}
-          className="relative h-7 w-12 rounded-full bg-secondary transition-colors aria-checked:bg-primary"
+          className="relative h-7 w-12 rounded-full border border-input bg-secondary transition-colors aria-checked:border-primary aria-checked:bg-primary"
         >
-          <span className={cn("absolute left-1 top-1 size-5 rounded-full bg-card shadow transition-transform duration-200", annual && "translate-x-5")} />
+          <span className={cn("absolute left-0.5 top-0.5 size-5 rounded-full bg-card shadow transition-transform duration-200", annual && "translate-x-5")} />
         </button>
         <span className={cn(annual ? "font-medium" : "text-muted-foreground")}>
           Annual <span className="ml-1 rounded-md bg-primary/10 px-1.5 py-0.5 text-xs text-primary">20% off</span>
