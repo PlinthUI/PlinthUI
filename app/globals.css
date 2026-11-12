@@ -1,0 +1,231 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-heading: var(--font-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-stage: var(--stage);
+  --color-base: var(--base);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+
+  /* Shape lock: controls 8px, cards and plinths 12px, chips 6px */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+  --radius-3xl: 12px;
+  --radius-4xl: 12px;
+
+  --shadow-lift: 0 1px 0 var(--edge) inset, 0 8px 24px -12px var(--shadow);
+}
+
+:root {
+  color-scheme: light;
+  --background: #f6f7f9;
+  --foreground: #14171c;
+  --card: #fbfbfc;
+  --card-foreground: #14171c;
+  --popover: #fbfbfc;
+  --popover-foreground: #14171c;
+  --primary: #3250c8;
+  --primary-foreground: #fbfbfc;
+  --secondary: #eceef2;
+  --secondary-foreground: #14171c;
+  --muted: #eceef2;
+  --muted-foreground: #586070;
+  --accent: #e8ebf1;
+  --accent-foreground: #14171c;
+  --destructive: #b4322f;
+  --border: #dde1e8;
+  --input: #c6ccd7;
+  --ring: #3250c8;
+  --success: #1f7a4d;
+  --warning: #96600a;
+  --stage: #eef0f4;
+  --stage-glow: rgba(255, 255, 255, 0.85);
+  --base: #d3d8e1;
+  --edge: rgba(255, 255, 255, 0.9);
+  --shadow: rgba(24, 34, 66, 0.28);
+  --radius: 0.5rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #0e1014;
+  --foreground: #e8eaee;
+  --card: #151921;
+  --card-foreground: #e8eaee;
+  --popover: #151921;
+  --popover-foreground: #e8eaee;
+  --primary: #8497ea;
+  --primary-foreground: #0e1014;
+  --secondary: #1c212b;
+  --secondary-foreground: #e8eaee;
+  --muted: #1c212b;
+  --muted-foreground: #9099a8;
+  --accent: #1f2530;
+  --accent-foreground: #e8eaee;
+  --destructive: #f0817d;
+  --border: #262b35;
+  --input: #343b48;
+  --ring: #8497ea;
+  --success: #5fc08d;
+  --warning: #e0a94f;
+  --stage: #12151b;
+  --stage-glow: rgba(132, 151, 234, 0.1);
+  --base: #07080a;
+  --edge: rgba(255, 255, 255, 0.06);
+  --shadow: rgba(0, 0, 0, 0.7);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply font-sans antialiased;
+    scroll-padding-top: 5rem;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: 16px;
+    line-height: 1.6;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 28%, transparent);
+  }
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* PlinthStage anatomy: lit stage, raised base slab, plaque */
+  .plinth-stage {
+    position: relative;
+    background:
+      radial-gradient(110% 80% at 50% -12%, var(--stage-glow), transparent 62%),
+      var(--stage);
+    border: 1px solid var(--border);
+    border-radius: 12px 12px 4px 4px;
+    box-shadow: 0 1px 0 var(--edge) inset;
+    overflow: hidden;
+  }
+  .plinth-base {
+    height: 8px;
+    margin: 0 10px;
+    background: linear-gradient(to bottom, var(--base), color-mix(in oklab, var(--base) 82%, var(--background)));
+    border-radius: 0 0 6px 6px;
+    box-shadow: 0 12px 20px -12px var(--shadow);
+  }
+  .plinth-plaque {
+    margin: 6px 22px 0;
+    padding: 6px 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  .rise {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 420ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 35ms);
+  }
+  .press {
+    transition: transform 120ms ease-out;
+  }
+  .press:active {
+    transform: scale(0.98);
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes beam-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* Shiki dual theme via CSS variables */
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: transparent;
+}
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark);
+}
+.shiki {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.65;
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  background: transparent !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
