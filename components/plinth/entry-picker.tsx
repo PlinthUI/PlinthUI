@@ -4,7 +4,6 @@ import { useId, useMemo, useState } from "react"
 import { Plus, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { searchEntries } from "@/lib/search"
-import { SOURCE_BY_ID } from "@/data/sources"
 import { useEntries } from "./entries-provider"
 
 /** Search box that lists matching entries with an add button. Shared by compare and collections. */
@@ -32,7 +31,7 @@ export function EntryPicker({ onPick, exclude = [], label = "Add a component", a
             <span className="min-w-0 text-sm">
               <span className="block truncate font-medium">{e.title}</span>
               <span className="block truncate text-xs text-muted-foreground">
-                {e.category} on {SOURCE_BY_ID[e.sourceId]?.name}
+                {e.category}
               </span>
             </span>
             <Button variant="ghost" size="sm" onClick={() => onPick(e.slug)} aria-label={`${actionLabel} ${e.title}`}>

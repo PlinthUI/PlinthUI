@@ -67,7 +67,7 @@ export default async function Home() {
                   </Link>
                 </h3>
                 <p className="mt-0.5 truncate text-sm text-muted-foreground">
-                  {e.category} on {sources.find((s) => s.id === e.sourceId)?.name}
+                  {e.category}
                 </p>
                 <p className="mt-1 text-xs text-muted-foreground tnum">Score {e.popularity}</p>
               </div>
