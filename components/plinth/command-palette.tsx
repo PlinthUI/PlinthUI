@@ -8,7 +8,6 @@ import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, Comma
 import { Button } from "@/components/ui/button"
 import { CATEGORIES } from "@/lib/categories"
 import { searchEntries } from "@/lib/search"
-import { SOURCE_BY_ID } from "@/data/sources"
 import { useEntries } from "./entries-provider"
 
 const OPEN_EVENT = "plinth:open-palette"
@@ -57,7 +56,6 @@ export function CommandPalette() {
             <CommandItem key={e.slug} value={`entry-${e.slug}`} onSelect={() => go(`/c/${e.slug}`)}>
               <Library aria-hidden />
               <span className="flex-1">{e.title}</span>
-              <span className="text-xs text-muted-foreground">{SOURCE_BY_ID[e.sourceId]?.name}</span>
             </CommandItem>
           ))}
         </CommandGroup>
