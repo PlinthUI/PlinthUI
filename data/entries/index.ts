@@ -7,6 +7,62 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
+    slug: "animated-tabs", title: "Animated tabs", category: "Navigation",
+    summary: "Tabs with a sliding thumb that moves by transform, full arrow, Home and End key support.",
+    tags: ["tabs","navigation","indicator","panel"], synonyms: ["tab bar","segmented tabs"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated",
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "accordion-group", title: "Accordion group", category: "Data Display",
+    summary: "Disclosure list with a single or multiple open mode and real buttons for headers.",
+    tags: ["accordion","faq","disclosure","collapse"], synonyms: ["expandable list","collapsible"],
+    source: "shreekumar-b", author: "shreekumar", style: "minimal", deps: ["lucide-react"],
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "file-dropzone", title: "File dropzone", category: "Forms",
+    summary: "Drag files in or choose them, see name and size, remove any. Nothing is uploaded.",
+    tags: ["upload","dropzone","file","drag and drop"], synonyms: ["file picker","attachment","uploader"],
+    source: "shreekumar-b", author: "shreekumar", style: "minimal", deps: ["lucide-react"],
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "pricing-switch", title: "Pricing cards with period switch", category: "Marketing UI",
+    summary: "Three plan cards and a monthly or yearly switch that recomputes the price. Prices are sample values.",
+    tags: ["pricing","plans","saas","cards","billing"], synonyms: ["subscription tiers","price table"],
+    source: "shreekumar-b", author: "shreekumar", style: "bold", deps: ["lucide-react"],
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "theme-switch", title: "Theme switch", category: "Basic Components",
+    summary: "Pill switch with a sliding knob and sun or moon icon, exposed as a switch role.",
+    tags: ["switch","toggle","theme","dark mode"], synonyms: ["light dark toggle","mode switch"],
+    source: "shreekumar-b", author: "shreekumar", style: "playful", deps: ["lucide-react"],
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "notification-bell", title: "Notification bell", category: "Overlays",
+    summary: "Bell with an unread count that opens a panel, closes on Escape or outside click, and marks all read.",
+    tags: ["notifications","bell","popover","inbox"], synonyms: ["alerts","inbox menu"],
+    source: "shreekumar-b", author: "shreekumar", style: "minimal", deps: ["lucide-react"],
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "step-progress", title: "Step progress", category: "Feedback",
+    summary: "Stepper with done, current and upcoming states and back and continue controls.",
+    tags: ["stepper","wizard","progress","onboarding"], synonyms: ["steps","checkout steps"],
+    source: "shreekumar-b", author: "shreekumar", style: "minimal", deps: ["lucide-react"],
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
+    slug: "code-input", title: "Code input", category: "Authentication",
+    summary: "Six digit code boxes with paste support and backspace navigation.",
+    tags: ["otp","verification","code","2fa","auth"], synonyms: ["pin input","passcode","sms code"],
+    source: "shreekumar-b", author: "shreekumar", style: "minimal",
+    popularity: 380, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
     slug: "typewriter-text", title: "Typewriter text", category: "Effects and Animations",
     summary: "Types and erases a list of phrases. Screen readers get every phrase, and reduced motion shows the first one still.",
     tags: ["text","typing","headline","effect"], synonyms: ["typing animation","text animation"],
