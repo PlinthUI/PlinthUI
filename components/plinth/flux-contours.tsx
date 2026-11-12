@@ -50,12 +50,177 @@ const MAX_FINE = 760_000 // cap on drawn pixels, for speed
  * low-resolution image. Color follows the element's text color, in light and
  * dark themes. Reduced motion draws one still frame.
  */
+const VERT = `#version 300 es
+void main() {
+  vec2 p = vec2(float((gl_VertexID << 1) & 2), float(gl_VertexID & 2));
+  gl_Position = vec4(p * 2.0 - 1.0, 0.0, 1.0);
+}`
+
+const FRAG = `#version 300 es
+precision highp float;
+uniform vec2 uRes;
+uniform float uTime, uScale, uLevels, uGlow, uLine, uIntro;
+uniform vec3 uColor;
+uniform vec4 uSwirl; // x, y in pixels, age 0..1, active
+out vec4 outColor;
+
+float hash(vec3 p) { return fract(sin(dot(p, vec3(127.1, 311.7, 74.7))) * 43758.5453); }
+
+float vnoise(vec3 p) {
+  vec3 i = floor(p), f = fract(p);
+  vec3 u = f * f * (3.0 - 2.0 * f);
+  return mix(
+    mix(mix(hash(i), hash(i + vec3(1, 0, 0)), u.x), mix(hash(i + vec3(0, 1, 0)), hash(i + vec3(1, 1, 0)), u.x), u.y),
+    mix(mix(hash(i + vec3(0, 0, 1)), hash(i + vec3(1, 0, 1)), u.x), mix(hash(i + vec3(0, 1, 1)), hash(i + vec3(1, 1, 1)), u.x), u.y),
+    u.z);
+}
+
+void main() {
+  vec2 frag = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y);
+  float ar = uRes.x / uRes.y;
+  vec2 p = vec2(frag.x / uRes.x * ar, frag.y / uRes.y);
+
+  if (uSwirl.w > 0.5) {
+    vec2 c = vec2(uSwirl.x / uRes.x * ar, uSwirl.y / uRes.y);
+    vec2 r = p - c;
+    float a = max(0.0, 1.0 - length(r) / 0.5) * (1.0 - uSwirl.z) * 5.0;
+    p = c + mat2(cos(a), -sin(a), sin(a), cos(a)) * r;
+  }
+
+  vec2 s = p * uScale * 2.2;
+  // domain warp makes the loops churn and merge
+  float wx = vnoise(vec3(s * 0.9 + vec2(3.1, 0.0), uTime * 0.35));
+  float wy = vnoise(vec3(s * 0.9 + vec2(0.0, 7.7), uTime * 0.35 + 9.0));
+  vec2 q = s + 3.4 * (vec2(wx, wy) - 0.5);
+  float n = vnoise(vec3(q.x, q.y - uTime * 0.25, uTime * 0.2)) * 0.65
+          + vnoise(vec3(q * 2.1 + vec2(4.0, 0.0), uTime * 0.3)) * 0.35;
+
+  float lv = n * uLevels;
+  float slope = fwidth(lv); // level change per pixel
+  float dist = abs(lv - floor(lv + 0.5)) / max(slope, 1e-4); // pixels to the nearest line
+
+  float crisp = 1.0 - smoothstep(uLine * 0.35, uLine * 1.15, dist);
+  float halo = exp(-dist / (uLine * 3.4)) * 0.3;
+  float br = vnoise(vec3(q * 1.4 + vec2(11.0, 0.0), uTime * 0.5));
+  float strokes = smoothstep(0.28, 0.58, br); // lines break into separate strokes
+  float gate = smoothstep(0.0, 0.006, slope); // fade lines where the field is flat
+
+  float alpha = clamp((crisp + halo) * strokes * gate * uGlow * uIntro, 0.0, 1.0);
+  outColor = vec4(uColor * alpha, alpha);
+}`
+
+/** True when this browser can compile the shader. Tested on a throwaway canvas. */
+function gpuAvailable() {
+  try {
+    const gl = document.createElement("canvas").getContext("webgl2")
+    if (!gl) return false
+    const compile = (type: number, src: string) => {
+      const sh = gl.createShader(type)!
+      gl.shaderSource(sh, src); gl.compileShader(sh)
+      return gl.getShaderParameter(sh, gl.COMPILE_STATUS) ? sh : null
+    }
+    const vs = compile(gl.VERTEX_SHADER, VERT), fs = compile(gl.FRAGMENT_SHADER, FRAG)
+    if (!vs || !fs) return false
+    const prog = gl.createProgram()!
+    gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog)
+    return !!gl.getProgramParameter(prog, gl.LINK_STATUS)
+  } catch {
+    return false
+  }
+}
+
 export function FluxContours({ className, levels = 8, scale = 1.5, speed = 0.45, glow = 1, lineWidth = 1.1, clickSwirl = false, intro = true }: Props) {
   const ref = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return
+    if (gpuAvailable()) return startGpu(el, { levels, scale, speed, glow, lineWidth, clickSwirl, intro })
+    return startCpu(el, { levels, scale, speed, glow, lineWidth, clickSwirl, intro })
+  }, [levels, scale, speed, glow, lineWidth, clickSwirl, intro])
+
+  return <canvas ref={ref} aria-hidden className={cn("pointer-events-none size-full text-foreground", className)} />
+}
+
+type Opts = Required<Omit<Props, "className">>
+
+/** Full resolution on the GPU: the field is evaluated for every pixel and lines are anti-aliased with the pixel derivative. */
+function startGpu(el: HTMLCanvasElement, o: Opts) {
+  const gl = el.getContext("webgl2", { alpha: true, premultipliedAlpha: true, antialias: false })
+  if (!gl) return
+  const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  const mk = (type: number, src: string) => { const sh = gl.createShader(type)!; gl.shaderSource(sh, src); gl.compileShader(sh); return sh }
+  const prog = gl.createProgram()!
+  gl.attachShader(prog, mk(gl.VERTEX_SHADER, VERT)); gl.attachShader(prog, mk(gl.FRAGMENT_SHADER, FRAG))
+  gl.linkProgram(prog); gl.useProgram(prog)
+  const U = (n: string) => gl.getUniformLocation(prog, n)
+  const u = { res: U("uRes"), time: U("uTime"), scale: U("uScale"), levels: U("uLevels"), glow: U("uGlow"), line: U("uLine"), intro: U("uIntro"), color: U("uColor"), swirl: U("uSwirl") }
+  gl.uniform1f(u.scale, o.scale); gl.uniform1f(u.levels, o.levels); gl.uniform1f(u.glow, o.glow)
+
+  let w = 0, h = 0, dpr = 1, raf = 0, visible = true, t = Math.random() * 50
+  const born = performance.now()
+  let swirl: { x: number; y: number; at: number } | null = null
+
+  const setColor = () => {
+    const m = getComputedStyle(el).color.match(/[\d.]+/g)
+    if (m && m.length >= 3) gl.uniform3f(u.color, Number(m[0]) / 255, Number(m[1]) / 255, Number(m[2]) / 255)
+  }
+  const resize = () => {
+    const r = el.getBoundingClientRect()
+    w = r.width; h = r.height
+    dpr = Math.min(window.devicePixelRatio || 1, 2)
+    if (w * h * dpr * dpr > 4_400_000) dpr = Math.sqrt(4_400_000 / Math.max(1, w * h))
+    el.width = Math.max(1, Math.round(w * dpr)); el.height = Math.max(1, Math.round(h * dpr))
+    gl.viewport(0, 0, el.width, el.height)
+    gl.uniform2f(u.res, el.width, el.height)
+    gl.uniform1f(u.line, Math.max(0.5, o.lineWidth) * dpr)
+  }
+  const draw = (now: number) => {
+    const age = swirl ? (now - swirl.at) / 1300 : 2
+    if (age >= 1) swirl = null
+    gl.uniform1f(u.time, t)
+    gl.uniform1f(u.intro, o.intro && !still ? Math.min(1, (now - born) / 1400) : 1)
+    gl.uniform4f(u.swirl, swirl ? swirl.x * dpr : 0, swirl ? swirl.y * dpr : 0, Math.min(1, age), swirl ? 1 : 0)
+    gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT)
+    gl.drawArrays(gl.TRIANGLES, 0, 3)
+  }
+  let frames = 0
+  const tick = (now: number) => {
+    raf = requestAnimationFrame(tick)
+    if (!visible) return
+    t += 0.012 * o.speed
+    if (++frames % 60 === 0) setColor()
+    draw(now)
+  }
+
+  resize(); setColor()
+  const ro = new ResizeObserver(() => { resize(); if (still) draw(0) })
+  ro.observe(el)
+  const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting })
+  io.observe(el)
+  const mo = new MutationObserver(() => { setColor(); if (still) draw(0) })
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["class", "data-theme"] })
+  const onDown = (e: PointerEvent) => {
+    if (!o.clickSwirl || still) return
+    const r = el.getBoundingClientRect()
+    if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) swirl = { x: e.clientX - r.left, y: e.clientY - r.top, at: performance.now() }
+  }
+  window.addEventListener("pointerdown", onDown, { passive: true })
+
+  if (still) draw(0)
+  else raf = requestAnimationFrame(tick)
+
+  return () => {
+    cancelAnimationFrame(raf)
+    ro.disconnect(); io.disconnect(); mo.disconnect()
+    window.removeEventListener("pointerdown", onDown)
+  }
+}
+
+/** Fallback for browsers without WebGL 2: the same field on a coarse grid, drawn on the CPU. */
+function startCpu(el: HTMLCanvasElement, o: Opts) {
+  const { levels, scale, speed, glow, lineWidth, clickSwirl, intro } = o
+  {
     const ctx = el.getContext("2d")
     if (!ctx) return
     const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -198,7 +363,5 @@ export function FluxContours({ className, levels = 8, scale = 1.5, speed = 0.45,
       ro.disconnect(); io.disconnect(); mo.disconnect()
       window.removeEventListener("pointerdown", onDown)
     }
-  }, [levels, scale, speed, glow, lineWidth, clickSwirl, intro])
-
-  return <canvas ref={ref} aria-hidden className={cn("pointer-events-none size-full text-foreground", className)} />
+  }
 }
