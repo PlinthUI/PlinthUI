@@ -7,10 +7,10 @@ export const contentType = "image/png"
 export default function OgImage() {
   return new ImageResponse(
     (
-      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#0e1014", color: "#e8eaee", padding: 72 }}>
+      <div style={{ width: "100%", height: "100%", display: "flex", flexDirection: "column", justifyContent: "space-between", background: "#000000", color: "#e8eaee", padding: 72 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-            <div style={{ width: 44, height: 34, background: "#8497ea", borderRadius: "6px 6px 0 0" }} />
+            <div style={{ width: 44, height: 34, background: "#ededed", borderRadius: "6px 6px 0 0" }} />
             <div style={{ width: 64, height: 14, background: "#e8eaee", borderRadius: "0 0 5px 5px" }} />
           </div>
           <div style={{ fontSize: 40, fontWeight: 600 }}>PlinthUI</div>

@@ -76,31 +76,31 @@
 
 .dark {
   color-scheme: dark;
-  --background: #0e1014;
-  --foreground: #e8eaee;
-  --card: #151921;
-  --card-foreground: #e8eaee;
-  --popover: #151921;
-  --popover-foreground: #e8eaee;
-  --primary: #8497ea;
-  --primary-foreground: #0e1014;
-  --secondary: #1c212b;
-  --secondary-foreground: #e8eaee;
-  --muted: #1c212b;
-  --muted-foreground: #9099a8;
-  --accent: #1f2530;
-  --accent-foreground: #e8eaee;
+  --background: #000000;
+  --foreground: #ededed;
+  --card: #0a0a0a;
+  --card-foreground: #ededed;
+  --popover: #0a0a0a;
+  --popover-foreground: #ededed;
+  --primary: #ededed;
+  --primary-foreground: #000000;
+  --secondary: #141414;
+  --secondary-foreground: #ededed;
+  --muted: #141414;
+  --muted-foreground: #a1a1a1;
+  --accent: #1a1a1a;
+  --accent-foreground: #ededed;
   --destructive: #f0817d;
-  --border: #262b35;
-  --input: #343b48;
-  --ring: #8497ea;
+  --border: #262626;
+  --input: #333333;
+  --ring: #d4d4d4;
   --success: #5fc08d;
   --warning: #e0a94f;
-  --stage: #12151b;
-  --stage-glow: rgba(132, 151, 234, 0.1);
-  --base: #07080a;
-  --edge: rgba(255, 255, 255, 0.06);
-  --shadow: rgba(0, 0, 0, 0.7);
+  --stage: #050505;
+  --stage-glow: rgba(255, 255, 255, 0.07);
+  --base: #1c1c1c;
+  --edge: rgba(255, 255, 255, 0.08);
+  --shadow: rgba(0, 0, 0, 0.9);
 }
 
 @layer base {

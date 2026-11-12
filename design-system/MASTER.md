@@ -69,3 +69,7 @@ Every list has a skeleton shaped like its final layout, a composed empty state a
 ## Banned in this project
 
 Em dashes and en dash separators, eyebrow labels, three equal feature cards, div-built fake product UI, decorative status dots, version strings in the footer, purple gradients.
+
+## Dark theme override
+
+Dark mode is pure black (`#000000`) with neutral greys and no accent: `--primary` is near-white `#EDEDED` with black text. Light mode keeps the cobalt accent. Set by the owner after Phase 1.
