@@ -14,7 +14,6 @@ const NAV = [
   { href: "/explore", label: "Explore" },
   { href: "/compare", label: "Compare" },
   { href: "/collections", label: "Collections" },
-  { href: "/sources", label: "Sources" },
 ]
 
 export function Logo() {

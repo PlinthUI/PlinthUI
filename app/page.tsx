@@ -185,11 +185,6 @@ export default async function Home() {
               </Link>
             </li>
           ))}
-          <li>
-            <Link href="/sources" className="inline-flex h-11 items-center gap-1 px-2 text-sm font-medium text-primary hover:underline">
-              About sources <ArrowRight className="size-4" aria-hidden />
-            </Link>
-          </li>
         </ul>
       </section>
     </>

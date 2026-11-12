@@ -15,8 +15,6 @@ export function SiteFooter() {
           <Link href="/collections" className="inline-flex min-h-9 items-center text-muted-foreground hover:text-foreground">Collections</Link>
         </nav>
         <nav aria-label="Project" className="grid content-start gap-1 text-sm">
-          <Link href="/sources" className="inline-flex min-h-9 items-center text-muted-foreground hover:text-foreground">Sources</Link>
-          <Link href="/sources#policy" className="inline-flex min-h-9 items-center text-muted-foreground hover:text-foreground">License policy</Link>
           <a href="https://github.com/PlinthUI/PlinthUI" className="inline-flex min-h-9 items-center text-muted-foreground hover:text-foreground">Repository</a>
         </nav>
       </div>
