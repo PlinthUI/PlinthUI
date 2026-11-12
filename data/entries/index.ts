@@ -10,6 +10,18 @@ import { ANIMATA_ENTRIES } from "./animata"
  */
 const DRAFTS: unknown[] = [
   entry({
+    slug: "flow-background", title: "Flow field background", category: "Effects and Animations",
+    summary: "Thin glowing lines flow through a drifting field and curl around the pointer. Uses the current text color, pauses off screen and draws one still frame for reduced motion.",
+    tags: ["background", "flow", "lines", "canvas", "hero", "landing"], synonyms: ["animated background", "flow lines", "particle field", "landing background"],
+    source: "shreekumar-b", author: "shreekumar", style: "animated",
+    files: [{ path: "components/plinth/flow-background.tsx", language: "tsx" }],
+    props: [
+      { name: "className", type: "string", description: "Classes for the canvas, for example to position it behind content." },
+      { name: "density", type: "number", default: "520", description: "How many lines are drawn. Scales with the canvas size." },
+    ],
+    popularity: 480, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
     slug: "glass-profile-card", title: "Glass profile card", category: "Basic Components",
     summary: "A frosted profile card over a photo with stats, follow toggle and like button.",
     tags: ["glass","glassmorphism","profile","card","frosted"], synonyms: ["frosted card","blur card"],

@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { ArrowRight, Lock } from "lucide-react"
+import { FlowBackground } from "@/components/plinth/flow-background"
 import { HeroSearch } from "@/components/plinth/hero-search"
 import { ItemCard } from "@/components/plinth/item-card"
 import { PlinthStage } from "@/components/plinth/plinth-stage"
@@ -24,6 +25,11 @@ export default async function Home() {
   return (
     <>
       {/* 1. Hero: asymmetric split with a live plinth */}
+      <div className="relative isolate overflow-hidden">
+        <div aria-hidden className="absolute inset-0 -z-10 opacity-55 [mask-image:linear-gradient(to_bottom,black_55%,transparent_100%)]">
+          <FlowBackground />
+        </div>
+        <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-r from-background via-background/60 to-transparent lg:via-background/40" />
       <section className="mx-auto grid min-h-[100dvh] max-w-[1400px] grid-cols-1 items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[6fr_7fr] lg:py-16">
         <div className="grid justify-items-start gap-6">
           <h1 className="text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[2.75rem] xl:text-5xl">Compare UI components before you commit</h1>
@@ -43,6 +49,7 @@ export default async function Home() {
           )}
         </div>
       </section>
+      </div>
 
       {/* 2. Ranked list */}
       {top.length > 0 && <section aria-labelledby="top-heading" className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6">
