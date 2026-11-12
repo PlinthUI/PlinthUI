@@ -19,14 +19,18 @@ export interface Repository {
   sources(): Promise<Source[]>
 }
 
-/** Reads the preview source from disk and serves it as the entry's code. */
+/** Reads each file's source from disk. Falls back to the preview file for the first file. */
 function loadCode(e: ComponentEntry): ComponentEntry {
   if (!e.provenance.redistributable) {
     return { ...e, files: e.files.map(({ path: p, language }) => ({ path: p, language })) }
   }
-  const file = path.join(process.cwd(), "previews", `${e.previewId}.tsx`)
-  const code = fs.readFileSync(file, "utf8")
-  return { ...e, files: e.files.map((f, i) => (i === 0 ? { ...f, code } : f)) }
+  const files = e.files.map((f, i) => {
+    const own = path.join(process.cwd(), f.path)
+    const fallback = path.join(process.cwd(), "previews", `${e.previewId}.tsx`)
+    const target = fs.existsSync(own) ? own : i === 0 ? fallback : null
+    return target ? { ...f, code: fs.readFileSync(target, "utf8") } : f
+  })
+  return { ...e, files }
 }
 
 export const repository: Repository = {

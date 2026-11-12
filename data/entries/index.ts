@@ -7,6 +7,23 @@ import { entry } from "./define"
  */
 const DRAFTS: unknown[] = [
   entry({
+    slug: "liquid-voice", title: "Liquid Voice", category: "Audio and Media",
+    summary: "A voice-input pill of real liquid glass that stretches into a recorder, with a generated waveform, cancel and send. The glass is drawn in WebGL 2 with a CSS fallback. No microphone is used.",
+    tags: ["voice", "audio", "recorder", "glass", "waveform", "webgl"], synonyms: ["voice input", "record button", "liquid glass", "dictation"],
+    source: "pin-ui", author: "Rachit Thakur", style: "glass", deps: ["motion"],
+    sourceUrl: "https://www.pinui.xyz/components/liquid-voice",
+    attribution: "By Rachit Thakur, from Pin UI. MIT licensed. Included unmodified with its licence notice. See THIRD_PARTY_NOTICES.md.",
+    files: [{ path: "components/audio/LiquidVoice.tsx", language: "tsx" }, { path: "components/audio/liquid-voice.css", language: "css" }],
+    variants: [{ id: "light", title: "Light" }, { id: "dark", title: "Dark" }],
+    props: [
+      { name: "theme", type: '"light" | "dark"', default: '"light"', description: "Picks the light or dark sky and controls." },
+      { name: "fill", type: "boolean", default: "false", description: "Fill the container edge to edge instead of a 16:10 box." },
+      { name: "onSend", type: "(durationMs: number) => void", description: "Called when a take is sent, with the recorded length." },
+      { name: "onCancel", type: "() => void", description: "Called when a take is cancelled or stopped." },
+    ],
+    popularity: 600, created: "2026-11-12", updated: "2026-11-12",
+  }),
+  entry({
     slug: "glass-profile-card", title: "Glass profile card", category: "Basic Components",
     summary: "A frosted profile card over a photo with stats, follow toggle and like button.",
     tags: ["glass","glassmorphism","profile","card","frosted"], synonyms: ["frosted card","blur card"],

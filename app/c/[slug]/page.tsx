@@ -36,8 +36,15 @@ export default async function ComponentPage({ params }: { params: Promise<Params
   const [related, all] = await Promise.all([repository.related(slug, 4), repository.list()])
   const siblings = all.filter((e) => e.category === entry.category)
   const source = SOURCE_BY_ID[entry.provenance.sourceId]
-  const code = entry.files[0]?.code ?? null
-  const codeHtml = code ? await codeToHtml(code, { lang: "tsx", themes: { light: "github-light", dark: "github-dark" }, defaultColor: false }) : null
+  const codeFiles = await Promise.all(
+    entry.files
+      .filter((f) => f.code)
+      .map(async (f) => ({
+        path: f.path,
+        code: f.code as string,
+        html: await codeToHtml(f.code as string, { lang: f.language, themes: { light: "github-light", dark: "github-dark" }, defaultColor: false }),
+      }))
+  )
 
   return (
     <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-4 py-8 sm:px-6 xl:grid-cols-[14rem_minmax(0,1fr)_12rem]">
@@ -92,7 +99,7 @@ export default async function ComponentPage({ params }: { params: Promise<Params
           </div>
         </header>
 
-        <Workbench entry={entry} codeHtml={codeHtml} codeText={code} />
+        <Workbench entry={entry} codeFiles={codeFiles} />
 
         {related.length > 0 && (
           <section id="related" className="mt-16 scroll-mt-24">

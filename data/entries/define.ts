@@ -17,6 +17,9 @@ type Def = {
   props?: ComponentEntry["props"]
   variants?: ComponentEntry["variants"]
   popularity: number
+  files?: { path: string; language: string }[]
+  sourceUrl?: string
+  attribution?: string
   created: string
   updated: string
 }
@@ -48,7 +51,7 @@ export function entry(d: Def): ComponentEntry {
           manual: deps.length ? [`npm install ${deps.join(" ")}`] : [],
         }
       : {},
-    files: [{ path: `components/${d.slug}.tsx`, language: "tsx" }],
+    files: d.files ?? [{ path: `components/${d.slug}.tsx`, language: "tsx" }],
     props: d.props,
     variants: d.variants,
     previewId: d.slug,
@@ -57,13 +60,13 @@ export function entry(d: Def): ComponentEntry {
     updatedAt: d.updated,
     provenance: {
       sourceId: d.source,
-      sourceUrl: source.url,
+      sourceUrl: d.sourceUrl ?? source.url,
       author: d.author,
       license: source.license,
       redistributable,
-      attribution: redistributable
+      attribution: d.attribution ?? (redistributable
         ? "Confirm the license with the project before use."
-        : "Premium source. Preview and metadata only. Code is available from the source under its own terms.",
+        : "Premium source. Preview and metadata only. Code is available from the source under its own terms."),
     },
   }
 }

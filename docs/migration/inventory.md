@@ -1,6 +1,8 @@
 # Pin UI to Plinth UI migration inventory
 
-Status: **blocked on the source repository.** Phase 1 (reconnaissance) found no Pin UI repository on this machine. Nothing has been migrated. Statuses below are all "Not started" until the repository is provided.
+Status: **in progress, approach agreed for review.** The components are MIT licensed (Pin UI README and https://www.pinui.xyz/terms) and published through a shadcn registry at `https://pinui.xyz/r/<name>.json`. Integration uses that official channel, keeps the licence notice (`THIRD_PARTY_NOTICES.md`) and credits the author, Rachit Thakur. The Pin UI name, mark and demo media are excluded by the licence and are not used.
+
+Integrated so far: **Liquid Voice** (`components/audio/LiquidVoice.tsx` and `liquid-voice.css`, dependency `motion`). Everything else below is still pending until the approach is approved.
 
 This list comes from the component names supplied by the project owner. It is a starting point, not a complete inventory: routes, categories and the Blocx collection still need to be discovered from the repository.
 
@@ -29,7 +31,7 @@ This list comes from the component names supplied by the project owner. It is a 
 | taxi | Taxi | Cards and widgets | /components/taxi | Not started | Pending | Pending | Pending | |
 | balance-card | Balance Card | Cards and widgets | /components/balance-card | Not started | Pending | Pending | Pending | |
 | cart-card | Add To Cart | Cards and widgets | /components/cart-card | Not started | Pending | Pending | Pending | |
-| liquid-voice | Liquid Voice | Audio and media | /components/liquid-voice | Not started | Pending | Pending | Pending | Screenshot reference supplied by owner |
+| liquid-voice | Liquid Voice | Audio and media | /components/liquid-voice | Complete | Captured | Tested (idle to recording) | Migrated | Registry item, 2 files, dep: motion. WebGL 2 with CSS fallback. Generated waveform, no microphone. |
 | recorder | Recorder | Audio and media | /components/recorder | Not started | Pending | Pending | Pending | |
 | selection-list | Selection List | Lists and pickers | /components/selection-list | Not started | Pending | Pending | Pending | |
 | chat-room | Chat Room | Lists and pickers | /components/chat-room | Not started | Pending | Pending | Pending | |
