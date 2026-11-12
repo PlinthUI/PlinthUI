@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { SOURCE_BY_ID } from "@/data/sources"
 import type { EntryCard } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 import { CompareButton } from "./compare-button"
@@ -7,7 +6,6 @@ import { PlinthStage } from "./plinth-stage"
 import { SaveButton } from "./save-button"
 
 export function ItemCard({ entry, layout = "grid", index = 0 }: { entry: EntryCard; layout?: "grid" | "list"; index?: number }) {
-  const source = SOURCE_BY_ID[entry.sourceId]
   return (
     <article
       className={cn("rise group relative flex rounded-xl", layout === "grid" ? "flex-col gap-3" : "flex-col gap-3 sm:flex-row sm:items-start sm:gap-5")}
@@ -24,9 +22,6 @@ export function ItemCard({ entry, layout = "grid", index = 0 }: { entry: EntryCa
                 {entry.title}
               </Link>
             </h3>
-            <p className="mt-0.5 text-[13px] text-muted-foreground">
-              by <span className="font-mono">{entry.author}</span> on {source?.name}
-            </p>
           </div>
           <div className="relative z-10 -mr-2 -mt-1 flex shrink-0">
             <SaveButton slug={entry.slug} title={entry.title} />
