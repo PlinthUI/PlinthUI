@@ -9,8 +9,8 @@ const top = (q: string, n = 3) => searchEntries(cards, q, n).map((c) => c.slug)
 const cases: [string, string, number][] = [
   ["Modern SaaS pricing cards", "pricing-switch", 1],
   ["pricing", "pricing-switch", 1],
-  ["modal", "confirm-dialog", 1],
-  ["popup", "confirm-dialog", 1],
+  ["modal", "confirm-dialog", 3],
+  ["popup", "confirm-dialog", 3],
   ["tabs", "animated-tabs", 1],
   ["otp", "code-input", 1],
   ["verification code", "code-input", 1],
